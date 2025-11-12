@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Всесвіт Звуків - Дитячий садок та Корекційний клуб</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Space Background -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="star-bursts"></div>
+        <!-- Blinking Stars -->
+        <div class="blinking-star star-1"></div>
+        <div class="blinking-star star-2"></div>
+        <div class="blinking-star star-3"></div>
+        <!-- Cartoon Planets from Image -->
+        <div class="cartoon-planet planet-1 yellow-orange-swirl">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-2 orange-brown-rocky">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-3 peach-striped">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-4 earth-like">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-5 deep-red-cratered">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-6 peach-blue-striped">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-7 yellow-orange-ringed">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+            <div class="planet-ring-system">
+                <div class="planet-ring ring-outer"></div>
+                <div class="planet-ring ring-middle"></div>
+                <div class="planet-ring ring-inner"></div>
+            </div>
+        </div>
+        <div class="cartoon-planet planet-8 teal-purple-ringed">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+            <div class="planet-ring-system">
+                <div class="planet-ring ring-thin"></div>
+            </div>
+        </div>
+        <div class="cartoon-planet planet-9 blue-purple-swirl">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-10 muted-red-brown">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-11 grey-purple-cratered">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <!-- Earth and Sun -->
+        <div class="cartoon-planet planet-earth">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+        <div class="cartoon-planet planet-sun">
+            <div class="planet-core"></div>
+            <div class="planet-pattern"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#home" class="logo">
+                    <img src="logo.png" alt="ВСЕСВІТ ЗВУКІВ - дитячий клуб розвитку" class="logo-image">
+                    <div class="logo-text">
+                        <h1>ВСЕСВІТ ЗВУКІВ</h1>
+                        <span class="logo-subtitle">дитячий клуб розвитку</span>
+                    </div>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#home">Головна</a></li>
+                    <li><a href="#services">Наші послуги</a></li>
+                    <li><a href="#locations">Наші локації</a></li>
+                    <li><a href="#contact">Контакти</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/vsesvit_zvukiv2/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/people/Vsesvit-Zvukiv2/61573980214964/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">ВСЕСВІТ ЗВУКІВ</h2>
+                <p class="hero-subtitle">ДИТЯЧИЙ КЛУБ</p>
+                <a href="#services" class="cta-button">Дізнатися більше</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->   
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Наші послуги</h2>
+            <div class="services-grid">
+                <div class="service-card" data-service="kindergarten">
+                    <div class="service-icon">🏫</div>
+                    <div class="service-content">
+                        <h3>Дитячий садок</h3>
+                        <p>
+                            Використання різних методик у формуванні особистості дитини, поєднане зі щоденними заняттями та іграми, а також помірним сенсорним і фізичним навантаженням, дає змогу кожній дитині гармонійно зростати, пізнаючи світ і навколишнє середовище.
+                        </p>
+                        <div class="service-details">
+                            <ul class="service-features">
+                                <li>Загальний розвиток</li>
+                                <li>Підготовка до школи, англійська мова</li>
+                                <li>Творчі заняття</li>
+                                <li>Сенсорний та фізичний розвиток</li>
+                            </ul>
+                        </div>
+                        <button class="service-details-btn">Детальніше →</button>
+                    </div>
+                </div>
+                <div class="service-card" data-service="speech-therapist">
+                    <div class="service-icon">💬</div>
+                    <div class="service-content">
+                        <h3>Корекційний клуб</h3>
+                        <p>Професійна логопедична допомога та корекційні заняття для дітей. Індивідуальний підхід до кожної дитини.</p>
+                        <div class="service-details">
+                            <ul class="service-features">
+                                <li>Логопедична корекція ЗМР, ЗПМР, ЗНМ різних рівнів, дислалія, дизартрія</li>
+                                <li>"Запуск" або стимулювання мовлення</li>
+                                <li>Логопедичний масаж</li>
+                                <li>Робота з різними віковими групами</li>
+                            </ul>
+                        </div>
+                        <button class="service-details-btn">Детальніше →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="locations">
+        <div class="container">
+            <h2 class="section-title">Наші локації</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-map">
+                        <iframe 
+                            src="https://www.google.com/maps?q=проспект+миру+31+кривий+ріг&hl=uk&t=m&z=15&output=embed"
+                            width="100%" 
+                            height="250" 
+                            style="border:0; border-radius: 10px 10px 0 0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="location-content">
+                        <h3>📍 Локація 1: Дитячий садок</h3>
+                        <p><strong>Адреса:</strong> проспект миру 31, Кривий Ріг</p>
+                        <p>Наш дитячий садок створено для повноцінного розвитку дітей дошкільного віку. Ми пропонуємо безпечне середовище, де кожна дитина отримує індивідуальну увагу та підтримку.</p>
+                        <div class="location-details">
+                            <p><strong>Режим роботи:</strong></p>
+                            <ul class="working-hours">
+                                <li>Понеділок - П'ятниця: 08:30 - 16:00</li>
+                                <li>Субота: Майстер-класи</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <div class="location-map">
+                        <iframe 
+                            src="https://www.google.com/maps?q=лермонтова+16+кривий+ріг&hl=uk&t=m&z=15&output=embed"
+                            width="100%" 
+                            height="250" 
+                            style="border:0; border-radius: 10px 10px 0 0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="location-content">
+                        <h3>📍 Локація 2: Корекційний клуб</h3>
+                        <p><strong>Адреса:</strong> Лермонтова 16, Кривий Ріг</p>
+                        <p>Професійний корекційний клуб для дітей, які потребують спеціальної корекційної підтримки. Наші кваліфіковані спеціалісти працюють з дітьми різного віку.</p>
+                        <div class="location-details">
+                            <p><strong>Режим роботи:</strong></p>
+                            <ul class="working-hours">
+                                <li>Понеділок - П'ятниця: 09:00 - 19:00</li>
+                                <li>Субота: 09:00 - 13:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Зв'яжіться з нами</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Телефон</h4>
+                            <a href="tel:+380672101516" class="contact-link">+380-67-210-15-16</a>
+                            <a href="tel:+380987196649" class="contact-link">+380-98-719-66-49 - Тетяна Василівна</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:budko79t@gmail.com" class="contact-link">budko79t@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="logo.png" alt="ВСЕСВІТ ЗВУКІВ - дитячий клуб розвитку" class="footer-logo">
+                    <p>Ми дбаємо про розвиток та щастя ваших дітей</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Швидкі посилання</h4>
+                    <ul>
+                        <li><a href="#home">Головна</a></li>
+                        <li><a href="#services">Послуги</a></li>
+                        <li><a href="#locations">Локації</a></li>
+                        <li><a href="#contact">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Наші послуги</h4>
+                    <ul>
+                        <li><a href="#services">Дитячий садок</a></li>
+                        <li><a href="#services">Логопедичний клуб</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ми в соціальних мережах</h4>
+                    <div class="footer-social-links">
+                        <a href="https://www.instagram.com/vsesvit_zvukiv2/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                            <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://www.facebook.com/people/Vsesvit-Zvukiv2/61573980214964/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook">
+                            <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;Всесвіт Звуків. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service Modal - Kindergarten -->
+    <div class="service-modal" id="kindergarten-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">🏫</div>
+                <h2>Дитячий садок</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-services">
+                    <div class="services-list">
+                        <div class="service-item">
+                            <h4>📚 Загальний розвиток</h4>
+                            <p>
+                                Комплексні заняття спрямовані на розвиток мислення, пам’яті, уваги та уяви у дітей від 2 років.
+                                Нові відкриття, цікаві ігри, спостереження та творчі завдання, допомагають дітям пізнавати світ навколо.
+                            </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🎓 Підготовка до школи</h4>
+                            <p>
+                                Наші заняття з підготовки до школи допомагають дітям упевнено зробити перший крок у навчання.
+                                Малюки знайомляться з цифрами, літерами, просторовими поняттями та навичками письма й лічби. Ми формуємо мотивацію до навчання та впевненість у власних силах.
+                            </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🎨 Творчі заняття</h4>
+                            <p>
+                                Під час занять діти експериментують із фарбами, пластиліном, природними матеріалами, папером та тканиною, створюючи власні маленькі шедеври.
+                                Кожне творче заняття — це можливість пізнати себе, розвинути дрібну моторику та естетичний смак.
+                            </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🏃 Фізичний розвиток</h4>
+                            <p>
+                                Наші сенсорні й фізичні заняття допомагають дітям краще відчувати своє тіло, рухи та навколишній світ.
+                                Усі активності проходять у формі веселих ігор і вправ, які приносять користь для здоров’я та гармонійного розвитку. 
+                                Ми дбаємо, щоб кожна дитина зростала сильною, гнучкою й упевненою у собі.
+                            </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🎵 Музичні заняття</h4>
+                            <p>
+                                Під час занять малюки співають пісеньки, рухаються під музику, знайомляться з різними інструментами, звуками та мелодіями, вчаться відчувати темп і ритм.
+                                Кожне заняття дарує дітям гарний настрій і допомагає відчути красу гармонії у звуках та русі.
+                                
+                            </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🌍 Англійська мова</h4>
+                            <p>Вивчення англійської мови у нашому садочку проходить у легкій ігровій формі, через пісеньки, віршики, рухливі ігри та цікаві тематичні заняття.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-viewer">
+                    <div class="photo-container">
+                        <div class="photo-slide active kindergarten-img-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal - Speech Therapist -->
+    <div class="service-modal" id="speech-therapist-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">💬</div>
+                <h2>Корекційний клуб</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-services">
+                    <div class="services-list">
+                        <div class="service-item">
+                            <h4>🔤 Логопедична корекція</h4>
+                            <p>Виправлення звуковимови, постановка звуків та їх автоматизація.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>💭 Запуск" або стимулювання мовлення</h4>
+                            <p>Імітація звуків, звуконаслідування, формування перших слів та фразового мовлення.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>👤 Логопедичний масаж</h4>
+                            <p>Дизартрія, міжзубний сигматизм, робота з інервацією АР </p>
+                        </div>
+                        <div class="service-item">
+                            <h4>👥 Робота з різними віковими групами</h4>
+                            <p>Заняття з дітьми від 2 років. Молодший дошкільний вік, шкільний вік, підлітковий вік.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🧠 Корекція дислексії та дисграфії</h4>
+                            <p>Спеціалізована робота з проблемами читання та письма.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>📊 Діагностика мовлення</h4>
+                            <p>Комплексне обстеження та визначення рівня розвитку мовлення дитини.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-viewer">
+                    <div class="photo-container">
+                        <div class="photo-slide active speech-img-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -27,8 +27,3 @@ The site is automatically deployed using **GitHub Pages**:
 2. GitHub Pages rebuilds and redeploys the site  
 3. The site becomes available at the custom domain
 
----
-
-## 🌍 Custom Domain Configuration
-This project uses the custom domain:
-

@@ -9,21 +9,3 @@ The project is deployed directly from the `main` branch and uses a custom domain
 Visit the live site here:  
 👉 https://vsesvit-zvukiv.com.ua
 
----
-
-## 📁 Project Structure
-- `index.html` — Main page of the website  
-- `assets/` — Images, icons, sounds, and other static files  
-- `styles/` — CSS stylesheets  
-- `scripts/` — JavaScript files  
-- `CNAME` — Domain configuration file for GitHub Pages  
-
----
-
-## 🚀 Deployment
-The site is automatically deployed using **GitHub Pages**:
-
-1. Push changes to the `main` branch  
-2. GitHub Pages rebuilds and redeploys the site  
-3. The site becomes available at the custom domain
-

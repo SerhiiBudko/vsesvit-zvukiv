@@ -1020,7 +1020,7 @@ section {
 
 .service-icon {
     font-size: 4rem;
-    margin: 2.5rem auto 1.5rem;
+    margin: 1.5rem auto 0rem;
     text-align: center;
     display: block;
     width: 100%;
@@ -2005,3 +2005,21 @@ section {
         font-size: 1.5rem;
     }
 }
+
+.fancy-divider {
+    width: 100%;
+    height: 5px;
+    margin: 10px auto;
+
+    /* Rounded line */
+    border-radius: 1px;
+
+    /* Gradient (yellow → orange) */
+    background: linear-gradient(90deg, #FFE467, #FFA234);
+
+    /* Soft glow */
+    box-shadow: 
+        0 4px 15px rgba(255, 175, 51, 0.4),
+        0 0 10px rgba(255, 220, 80, 0.5);
+}
+

@@ -41,7 +41,7 @@ export function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/correctional-club" 
+                  to="/correctional_club" 
                   className="text-white/80 hover:text-[#FFB703] transition-colors duration-300"
                 >
                   Корекційний клуб

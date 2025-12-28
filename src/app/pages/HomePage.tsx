@@ -214,8 +214,12 @@ function MobileHero() {
         </h1>
 
         <p className="mt-4 text-base text-white/90 leading-relaxed">
-          Створюємо теплий та безпечний простір, де кожна дитина відкриває свої
-          таланти через гру, творчість та турботу досвідчених педагогів.
+          <span className="block">
+            Створюємо теплий та безпечний простір, де кожна дитина відкриває
+          </span>
+          <span className="block">
+            свої таланти через гру, творчість та турботу досвідчених педагогів.
+          </span>
         </p>
       </div>
     </div>
@@ -291,11 +295,10 @@ function DesktopHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.35 }}
             >
-              <span className="block whitespace-nowrap">
-                Створюємо теплий та безпечний простір, де кожна дитина
-              </span>
-              <span className="block whitespace-nowrap">
-                відкриває свої таланти через гру, творчість та турботу досвідчених педагогів.
+              <span className="block">
+                Створюємо теплий та безпечний простір, де 
+                кожна дитина відкриває
+                свої таланти через гру, творчість та турботу досвідчених педагогів.
               </span>
             </motion.p>
           </div>

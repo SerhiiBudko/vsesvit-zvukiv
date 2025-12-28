@@ -37,6 +37,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useRef, useState, ReactNode } from "react";
 
+
 /* ================= MOBILE HERO ================= */
 
 function MobileCorrectionalHero({ image }: { image: string }) {
@@ -316,8 +317,10 @@ export default function CorrectionalClubPage() {
                 <ContactItem
                   icon={<Phone className="w-7 h-7 text-[#FFB703]" />}
                   title="Телефон"
-                  link={{ href: "tel:+380987196649", label: "+380-98-719-66-49" }}
-                  link={{ href: "tel:+380672101516", label: "+380-67-210-15-16" }}
+                  links={[
+                    { href: "tel:+380987196649", label: "+380-98-719-66-49" },
+                    { href: "tel:+380672101516", label: "+380-67-210-15-16" },
+                  ]}
                 />
 
                 <ContactItem
@@ -435,11 +438,13 @@ function ContactItem({
   title,
   lines,
   link,
+  links,
 }: {
   icon: ReactNode;
   title: string;
   lines?: string[];
   link?: { href: string; label: string };
+  links?: { href: string; label: string }[];
 }) {
   return (
     <div className="flex items-start gap-5">
@@ -468,6 +473,20 @@ function ContactItem({
             >
               {link.label}
             </a>
+          </div>
+        )}
+
+        {links && (
+          <div className="mt-2 space-y-1">
+            {links.map((l, idx) => (
+              <a
+                key={idx}
+                href={l.href}
+                className="block text-[#2E2E2E]/70 text-lg hover:text-[#FFB703] transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
           </div>
         )}
       </div>

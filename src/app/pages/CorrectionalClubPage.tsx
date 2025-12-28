@@ -4,11 +4,11 @@ import correctionalHeroImage from "@/assets/LogopedPhoto1.png";
 import correctionalExteriorImage from "@/assets/generalphoto.png";
 import correctionalInteriorImage from "@/assets/5f8522679dafd3ef75bb99e6e2e6a375637b1054.png";
 
-import photo1 from "@/assets/photo1.jpg";
-import photo2 from "@/assets/photo2.jpg";
-import photo3 from "@/assets/photo3.jpg";
-import photo4 from "@/assets/photo4.jpg";
-import photo5 from "@/assets/photo5.jpg";
+import photo1 from "@/assets/photo1.JPG";
+import photo2 from "@/assets/photo2.JPG";
+import photo3 from "@/assets/photo3.JPG";
+import photo4 from "@/assets/photo4.JPG";
+import photo5 from "@/assets/photo5.JPG";
 
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";

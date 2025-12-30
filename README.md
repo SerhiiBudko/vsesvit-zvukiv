@@ -1,11 +1,26 @@
+# Всесвіт Звуків - Official Website
 
-  # Hero Section Design
+Official website for **Всесвіт Звуків** (Universe of Sounds) - an educational center in Kryvyi Rih, Ukraine, offering kindergarten services and speech therapy correctional club for children.
 
-  This is a code bundle for Hero Section Design. The original project is available at https://www.figma.com/design/6xlUVrgeEMqWxZi3arsLbP/Hero-Section-Design.
+## 🌐 Live Website
 
-  ## Running the code
+Visit the live site: [vsesvit-zvukiv.com.ua](https://vsesvit-zvukiv.com.ua)
 
-  Run `npm i` to install the dependencies.
+## About the Project
 
-  Run `npm run dev` to start the development server.
-  
+This is a modern, responsive website built with React, TypeScript, and Vite. The website showcases two main services:
+- **Дитячий садок** (Kindergarten) - Comprehensive child development program
+- **Корекційний клуб** (Correctional Club) - Speech therapy and correctional services
+
+The website features smooth animations, responsive design for mobile and desktop, and an intuitive user interface.
+
+## Tech Stack
+
+- **React** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling
+- **React Router** - Navigation
+- **Framer Motion** - Animations
+- **React Slick** - Image carousels
+

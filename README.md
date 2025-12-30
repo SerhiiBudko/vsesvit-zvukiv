@@ -23,4 +23,3 @@ The website features smooth animations, responsive design for mobile and desktop
 - **React Router** - Navigation
 - **Framer Motion** - Animations
 - **React Slick** - Image carousels
-

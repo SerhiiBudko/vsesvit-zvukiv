@@ -317,14 +317,14 @@ export default function ContactPage() {
             >
               <div className="w-full h-64 bg-gray-200">
                 <iframe
-                  src="https://www.google.com/maps?q=Лермонтова+16,+Кривий+Ріг&output=embed"
+                  src="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Корекційний клуб - Лермонтова 16, Кривий Ріг"
+                  title="Корекційний клуб - просп.Центральний (Лермонтова), 16, Кривий Ріг"
                 />
               </div>
 
@@ -337,7 +337,7 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-[#FFB703] flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-[#2E2E2E] mb-1">Адреса:</p>
-                    <p className="text-[#2E2E2E]">Лермонтова 16, Кривий Ріг</p>
+                    <p className="text-[#2E2E2E]">просп.Центральний (Лермонтова), 16, Кривий Ріг</p>
                   </div>
                 </div>
 
@@ -367,7 +367,7 @@ export default function ContactPage() {
                 <Button
                   variant="primary"
                   size="md"
-                  href="https://www.google.com/maps?q=Лермонтова+16,+Кривий+Ріг"
+                  href="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг"
                 >
                   Прокласти маршрут
                 </Button>

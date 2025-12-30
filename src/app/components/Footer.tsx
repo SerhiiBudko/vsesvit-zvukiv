@@ -124,7 +124,7 @@ export function Footer() {
                   <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold mb-1">Корекційний клуб</p>
-                    <p>Лермонтова 16</p>
+                    <p>просп.Центральний (Лермонтова), 16</p>
                     <p>Кривий Ріг</p>
                   </div>
                 </div>

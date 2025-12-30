@@ -208,7 +208,7 @@ export default function CorrectionalClubPage() {
               },
               {
                 title: "2) Діагностика та план",
-                text: "Формуємо цілі й кроки: що саме будемо коригувати та як вимірюємо прогрес.",
+                text: "Формуємо цілі й кроки: що саме будемо коригувати та як.",
               },
               {
                 title: "3) Заняття (індивідуально/у малій групі)",
@@ -263,14 +263,14 @@ export default function CorrectionalClubPage() {
               transition={{ duration: 0.7 }}
             >
               <iframe
-                src="https://www.google.com/maps?q=Лермонтова+16,+Кривий+Ріг&output=embed"
+                src="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Корекційний клуб - Лермонтова 16, Кривий Ріг"
+                title="Корекційний клуб - просп.Центральний (Лермонтова), 16, Кривий Ріг"
               />
             </motion.div>
 
@@ -305,7 +305,7 @@ export default function CorrectionalClubPage() {
                 <ContactItem
                   icon={<MapPin className="w-7 h-7 text-[#FFB703]" />}
                   title="Адреса"
-                  lines={["Лермонтова 16", "Кривий Ріг"]}
+                  lines={["просп.Центральний (Лермонтова), 16", "Кривий Ріг"]}
                 />
 
                 <ContactItem

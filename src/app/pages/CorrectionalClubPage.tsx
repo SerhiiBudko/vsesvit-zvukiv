@@ -1,14 +1,18 @@
 // src/app/pages/CorrectionalClubPage.tsx
 
 import correctionalHeroImage from "@/assets/LogopedPhoto1.png";
-import correctionalExteriorImage from "@/assets/generalphoto.png";
-import correctionalInteriorImage from "@/assets/5f8522679dafd3ef75bb99e6e2e6a375637b1054.png";
 
-import photo1 from "@/assets/photo1.JPG";
-import photo2 from "@/assets/photo2.JPG";
-import photo3 from "@/assets/photo3.JPG";
-import photo4 from "@/assets/photo4.JPG";
-import photo5 from "@/assets/photo5.JPG";
+import LogopedPhoto2 from "@/assets/LogopedPhoto2.jpeg";
+import LogopedPhoto3 from "@/assets/LogopedPhoto3.jpeg";
+import LogopedPhoto4 from "@/assets/LogopedPhoto4.jpeg";
+import LogopedPhoto5 from "@/assets/LogopedPhoto5.jpeg";
+import LogopedPhoto6 from "@/assets/LogopedPhoto6.jpeg";
+import LogopedPhoto7 from "@/assets/LogopedPhoto7.jpeg";
+import LogopedPhoto8 from "@/assets/LogopedPhoto8.jpeg";
+import LogopedPhoto9 from "@/assets/LogopedPhoto9.jpeg";
+import LogopedPhoto10 from "@/assets/LogopedPhoto10.jpeg";
+import LogopedPhoto11 from "@/assets/LogopedPhoto11.jpeg";
+import LogopedPhoto12 from "@/assets/LogopedPhoto12.png";
 
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
@@ -279,11 +283,7 @@ export default function CorrectionalClubPage() {
               transition={{ duration: 0.7 }}
             >
               <div className="h-full">
-                <CorrectionalPhotoGallerySlider
-                  exterior={correctionalExteriorImage}
-                  interior={correctionalInteriorImage}
-                  photos={[photo1, photo2, photo3, photo4, photo5]}
-                />
+                <CorrectionalPhotoGallerySlider />
               </div>
             </motion.div>
           </div>
@@ -496,22 +496,22 @@ function ContactItem({
 
 /* ===================== Photo Gallery Slider ===================== */
 
-function CorrectionalPhotoGallerySlider({
-  exterior,
-  interior,
-  photos,
-}: {
-  exterior: string;
-  interior: string;
-  photos: string[];
-}) {
+function CorrectionalPhotoGallerySlider() {
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const allPhotos = [
-    { src: exterior, alt: "Зовнішній вигляд центру" },
-    { src: interior, alt: "Кабінет для занять" },
-    ...photos.map((src, i) => ({ src, alt: `Фото ${i + 1}` })),
+    { src: LogopedPhoto12, alt: "Корекційні заняття - Фото 12" },
+    { src: LogopedPhoto2, alt: "Корекційні заняття - Фото 2" },
+    { src: LogopedPhoto3, alt: "Корекційні заняття - Фото 3" },
+    { src: LogopedPhoto4, alt: "Корекційні заняття - Фото 4" },
+    { src: LogopedPhoto5, alt: "Корекційні заняття - Фото 5" },
+    { src: LogopedPhoto6, alt: "Корекційні заняття - Фото 6" },
+    { src: LogopedPhoto7, alt: "Корекційні заняття - Фото 7" },
+    { src: LogopedPhoto8, alt: "Корекційні заняття - Фото 8" },
+    { src: LogopedPhoto9, alt: "Корекційні заняття - Фото 9" },
+    { src: LogopedPhoto10, alt: "Корекційні заняття - Фото 10" },
+    { src: LogopedPhoto11, alt: "Корекційні заняття - Фото 11" },
   ];
 
   const settings = {

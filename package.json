@@ -67,9 +67,9 @@
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
     "@types/react-slick": "^0.23.13",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "tailwindcss": "4.1.12",
-    "vite": "6.3.5"
+    "vite": "^6.4.1"
   },
   "peerDependencies": {
     "react": "18.3.1",

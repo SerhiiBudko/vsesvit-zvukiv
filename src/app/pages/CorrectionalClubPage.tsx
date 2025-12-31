@@ -538,26 +538,29 @@ function CorrectionalPhotoGallerySlider() {
         ))}
       </Slider>
 
-      <button
-        onClick={() => sliderRef.current?.slickPrev()}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-[#003060] transition-all duration-300 group"
-        aria-label="Previous Photo"
-      >
-        <ChevronLeft className="w-7 h-7 text-[#003060] group-hover:text-white" />
-      </button>
+      {/* Navigation controls aligned at bottom */}
+      <div className="absolute bottom-6 left-0 right-0 z-10 px-4 flex items-center justify-between">
+        <button
+          onClick={() => sliderRef.current?.slickPrev()}
+          className="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-[#003060] active:bg-[#003060] [&:active>svg]:text-white transition-all duration-300 group"
+          aria-label="Previous Photo"
+        >
+          <ChevronLeft className="w-7 h-7 text-[#003060] group-hover:text-white" />
+        </button>
 
-      <button
-        onClick={() => sliderRef.current?.slickNext()}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-[#003060] transition-all duration-300 group"
-        aria-label="Next Photo"
-      >
-        <ChevronRight className="w-7 h-7 text-[#003060] group-hover:text-white" />
-      </button>
+        <div className="bg-[#003060]/80 backdrop-blur-sm px-6 py-2 rounded-full">
+          <p className="text-white font-bold text-sm">
+            {currentSlide + 1} / {allPhotos.length}
+          </p>
+        </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-[#003060]/80 backdrop-blur-sm px-6 py-2 rounded-full">
-        <p className="text-white font-bold text-sm">
-          {currentSlide + 1} / {allPhotos.length}
-        </p>
+        <button
+          onClick={() => sliderRef.current?.slickNext()}
+          className="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-[#003060] active:bg-[#003060] [&:active>svg]:text-white transition-all duration-300 group"
+          aria-label="Next Photo"
+        >
+          <ChevronRight className="w-7 h-7 text-[#003060] group-hover:text-white" />
+        </button>
       </div>
     </div>
   );

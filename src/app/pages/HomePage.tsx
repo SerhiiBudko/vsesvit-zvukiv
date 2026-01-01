@@ -1,11 +1,56 @@
 import teacherImage from "@/assets/4a52e4a61a78df7e73a78d08c3883b149cd72988.png";
 import parentChildImage from "@/assets/7ef5bb868035840156acaedc3d1b8b01a05331ce.png";
-import heroImage from "@/assets/fd018b67431b677e0933f671b2e5704c7d35e17a.png";
+import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
+import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
+import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";
 import { Button } from "../components/Button";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
 import { CircleCheck } from "lucide-react";
+
+type ImageSource = {
+  src: string;
+  w: number;
+  type?: string;
+};
+
+type ResponsiveImageProps = {
+  alt: string;
+  className?: string;
+  sources: ImageSource[];
+  sizes?: string;
+  fetchPriority?: "high" | "low" | "auto";
+  loading?: "eager" | "lazy";
+  decoding?: "async" | "auto" | "sync";
+};
+
+function ResponsiveImage({
+  alt,
+  className,
+  sources,
+  sizes,
+  fetchPriority,
+  loading,
+  decoding = "async",
+}: ResponsiveImageProps) {
+  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
+  const fallback = sources[0]?.src; // smallest as default
+
+  return (
+    <img
+      src={fallback}
+      srcSet={srcSet || undefined}
+      sizes={sizes}
+      alt={alt}
+      className={className}
+      loading={loading}
+      decoding={decoding}
+      fetchPriority={fetchPriority}
+    />
+  );
+}
+
 
 export default function HomePage() {
   return (
@@ -35,11 +80,14 @@ export default function HomePage() {
               style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
             >
               <div className="aspect-video">
-                <img
-                  src={teacherImage}
-                  alt="Педагог з дітьми"
-                  className="w-full h-full object-cover"
-                />
+              <img
+                src={teacherImage}
+                alt="Педагог з дітьми"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+
               </div>
             </div>
 
@@ -172,7 +220,10 @@ export default function HomePage() {
                   src={parentChildImage}
                   alt="Щаслива мама з дитиною"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
+
               </div>
             </div>
           </div>
@@ -195,11 +246,18 @@ function MobileHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF7E6] via-[#FFFDF8] to-white" />
 
         {/* image */}
-        <img
-          src={heroImage}
+        <ResponsiveImage
           alt="Діти граються з кульками"
           className="relative z-10 w-full h-full object-cover"
+          sources={[
+            { src: heroImageMobileWebp, w: 640 }
+          ]}
+          // для мобільного — картинка на всю ширину екрану
+          sizes="100vw"
+          fetchPriority="high"
+          loading="eager"
         />
+
 
         {/* fade image -> blue section */}
         <div className="absolute inset-x-0 bottom-0 z-20 h-40 bg-gradient-to-b from-transparent via-[#003060]/35 to-[#003060]" />
@@ -247,11 +305,20 @@ function DesktopHero() {
         animate={{ x: 0 }}
         transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
       >
-        <img
-          src={heroImage}
+        <ResponsiveImage
           alt="Діти граються з кульками"
           className="w-full h-full object-cover"
+          sources={[
+            { src: heroImageTabletWebp, w: 1024 },
+            { src: heroImageDesktopWebp, w: 1376 },
+          ]}
+          // на десктопі картинка фактично займає праву частину, але простіше — 100vw.
+          // якщо хочеш точніше: 60vw (у тебе ліва панель забирає частину)
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          fetchPriority="high"
+          loading="eager"
         />
+
       </motion.div>
 
       {/* Navy Panel - Animate from LEFT */}

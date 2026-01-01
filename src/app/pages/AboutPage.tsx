@@ -9,18 +9,62 @@ import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
+import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
+import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";
+import AboutUsP1 from "@/assets/aboutusp1desktop.webp";
+import individualApproachImage from "@/assets/aboutusp2.webp";
+import professionalismImage from "@/assets/aboutusp3.webp";
+import playBasedLearningImage from "@/assets/aboutusp4.webp";
+import partnershipImage from "@/assets/aboutusp5.webp";
+import chooseDirectionImage from "@/assets/aboutusp6.webp";
 
-import heroImage from "@/assets/fd018b67431b677e0933f671b2e5704c7d35e17a.png";
-import careAndSafetyImage from "@/assets/609b10dc60ba117a2c78b5270e2374784a62330e.png";
-import individualApproachImage from "@/assets/e004da0371f33aeae3f7943ad1aaeaa477c7df3a.png";
-import professionalismImage from "@/assets/75492affabf8b5e099f8ace2ca2be8d86c6d5210.png";
-import playBasedLearningImage from "@/assets/2d756daea226b01dd536d5375ea0429167a88dce.png";
-import partnershipImage from "@/assets/c7562724aaa18d95201f0482497b155c37f30f94.png";
-import chooseDirectionImage from "@/assets/184129f0672e109d94e7bb15954e45c55352bfb1.png";
+
+type ImageSource = {
+  src: string;
+  w: number;
+  type?: string;
+};
+
+type ResponsiveImageProps = {
+  alt: string;
+  className?: string;
+  sources: ImageSource[];
+  sizes?: string;
+  fetchPriority?: "high" | "low" | "auto";
+  loading?: "eager" | "lazy";
+  decoding?: "async" | "auto" | "sync";
+};
+
+function ResponsiveImage({
+  alt,
+  className,
+  sources,
+  sizes,
+  fetchPriority,
+  loading,
+  decoding = "async",
+}: ResponsiveImageProps) {
+  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
+  const fallback = sources[0]?.src; // smallest as default
+
+  return (
+    <img
+      src={fallback}
+      srcSet={srcSet || undefined}
+      sizes={sizes}
+      alt={alt}
+      className={className}
+      loading={loading}
+      decoding={decoding}
+      fetchPriority={fetchPriority}
+    />
+  );
+}
 
 /* ================= MOBILE HERO ================= */
 
-function MobileAboutHero({ image }: { image: string }) {
+function MobileAboutHero() {
   return (
     <div className="bg-white overflow-hidden">
       {/* PHOTO (from right) */}
@@ -30,16 +74,17 @@ function MobileAboutHero({ image }: { image: string }) {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* warm gradient behind image */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF7E6] via-[#FFFDF8] to-white" />
 
-        <ImageWithFallback
-          src={image}
-          alt="Про нас - Всесвіт Звуків"
+        <ResponsiveImage
+          alt="Діти граються з кульками"
           className="relative z-10 w-full h-full object-cover"
+          sources={[{ src: heroImageMobileWebp, w: 640 }]}
+          sizes="100vw"
+          fetchPriority="high"
+          loading="eager"
         />
 
-        {/* blend into blue */}
         <div className="absolute inset-x-0 bottom-0 z-20 h-48 bg-gradient-to-b from-transparent via-[#003060]/45 to-[#003060]" />
       </motion.div>
 
@@ -54,9 +99,7 @@ function MobileAboutHero({ image }: { image: string }) {
           delay: 0.08,
         }}
       >
-        <h1 className="text-3xl font-bold text-[#F6F1E4] leading-tight">
-          Про нас
-        </h1>
+        <h1 className="text-3xl font-bold text-[#F6F1E4] leading-tight">Про нас</h1>
 
         <p className="mt-4 text-base text-white/90 leading-relaxed">
           <span className="block font-semibold">Всесвіт Звуків</span>
@@ -64,8 +107,8 @@ function MobileAboutHero({ image }: { image: string }) {
             Це два окремі заклади у Кривому Розі: корекційний клуб та дитячий садок.
           </span>
           <span className="block">
-            Ми допомагаємо дітям від 2 років розвиватися, навчатися та впевнено зростати
-            у теплій підтримуючій атмосфері.
+            Ми допомагаємо дітям від 2 років розвиватися, навчатися та впевнено зростати у теплій
+            підтримуючій атмосфері.
           </span>
         </p>
 
@@ -78,6 +121,7 @@ function MobileAboutHero({ image }: { image: string }) {
     </div>
   );
 }
+
 
 /* ================= CHOOSE DIRECTION SECTION ================= */
 
@@ -190,7 +234,7 @@ export default function AboutPage() {
 
       {/* Mobile hero */}
       <div className="block lg:hidden">
-        <MobileAboutHero image={heroImage} />
+        <MobileAboutHero />
       </div>
 
       {/* Desktop hero (your existing one) */}
@@ -211,7 +255,19 @@ export default function AboutPage() {
           animate={{ y: 0 }}
           transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
         >
-          <img src={heroImage} alt="Хто ми є" className="w-full h-full object-cover" />
+          <ResponsiveImage
+            alt="Діти граються з кульками"
+            className="w-full h-full object-cover"
+            sources={[
+              { src: heroImageTabletWebp, w: 1024 },
+              { src: heroImageDesktopWebp, w: 1376 },
+            ]}
+            // на десктопі картинка фактично займає праву частину, але простіше — 100vw.
+            // якщо хочеш точніше: 60vw (у тебе ліва панель забирає частину)
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            fetchPriority="high"
+            loading="eager"
+          />
         </motion.div>
 
         {/* Navy Panel - Animate from TOP */}
@@ -299,7 +355,7 @@ export default function AboutPage() {
 
             <div className="rounded-3xl overflow-hidden shadow-lg order-first lg:order-last">
               <ImageWithFallback
-                src={careAndSafetyImage}
+                src={AboutUsP1}
                 alt="Турбота і безпека дітей"
                 className="w-full h-full object-cover aspect-[4/3]"
               />

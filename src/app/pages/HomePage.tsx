@@ -1,5 +1,5 @@
-import teacherImage from "@/assets/4a52e4a61a78df7e73a78d08c3883b149cd72988.png";
-import parentChildImage from "@/assets/7ef5bb868035840156acaedc3d1b8b01a05331ce.png";
+import teacherImage from "@/assets/4a52e4a61a78df7e73a78d08c3883b149cd72988.webp";
+import parentChildImage from "@/assets/7ef5bb868035840156acaedc3d1b8b01a05331ce.webp";
 import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
 import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
 import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";

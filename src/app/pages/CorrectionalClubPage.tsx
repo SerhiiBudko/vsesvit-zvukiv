@@ -1,7 +1,4 @@
 // src/app/pages/CorrectionalClubPage.tsx
-
-import correctionalHeroImage from "@/assets/LogopedPhoto1.png";
-
 import LogopedPhoto2 from "@/assets/LogopedPhoto2.jpeg";
 import LogopedPhoto3 from "@/assets/LogopedPhoto3.jpeg";
 import LogopedPhoto4 from "@/assets/LogopedPhoto4.jpeg";
@@ -13,11 +10,12 @@ import LogopedPhoto9 from "@/assets/LogopedPhoto9.jpeg";
 import LogopedPhoto10 from "@/assets/LogopedPhoto10.jpeg";
 import LogopedPhoto11 from "@/assets/LogopedPhoto11.jpeg";
 import LogopedPhoto12 from "@/assets/LogopedPhoto12.png";
-
+import logopedphoto1mobile from "@/assets/logopedp1mobile.webp";
+import logopedphoto1tablet from "@/assets/logopedp1tablet.webp";
+import logopedphoto1desktop from "@/assets/logopedp1desktop.webp"; 
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { Button } from "../components/Button";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 import { motion } from "motion/react";
 import {
@@ -41,10 +39,52 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useRef, useState, ReactNode } from "react";
 
+type ImageSource = {
+  src: string;
+  w: number;
+  type?: string;
+};
+
+type ResponsiveImageProps = {
+  alt: string;
+  className?: string;
+  sources: ImageSource[];
+  sizes?: string;
+  fetchPriority?: "high" | "low" | "auto";
+  loading?: "eager" | "lazy";
+  decoding?: "async" | "auto" | "sync";
+};
+
+function ResponsiveImage({
+  alt,
+  className,
+  sources,
+  sizes,
+  fetchPriority,
+  loading,
+  decoding = "async",
+}: ResponsiveImageProps) {
+  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
+  const fallback = sources[0]?.src; // smallest as default
+
+  return (
+    <img
+      src={fallback}
+      srcSet={srcSet || undefined}
+      sizes={sizes}
+      alt={alt}
+      className={className}
+      loading={loading}
+      decoding={decoding}
+      fetchPriority={fetchPriority}
+    />
+  );
+}
+
 
 /* ================= MOBILE HERO ================= */
 
-function MobileCorrectionalHero({ image }: { image: string }) {
+function MobileCorrectionalHero() {
   return (
     <div className="bg-white overflow-hidden">
       {/* PHOTO (from right) */}
@@ -57,10 +97,13 @@ function MobileCorrectionalHero({ image }: { image: string }) {
         {/* warm gradient behind image */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF7E6] via-[#FFFDF8] to-white" />
 
-        <ImageWithFallback
-          src={image}
-          alt="Корекційний клуб - Всесвіт Звуків"
+        <ResponsiveImage
+          alt="Діти граються з кульками"
           className="relative z-10 w-full h-full object-cover"
+          sources={[{ src: logopedphoto1mobile, w: 640 }]}
+          sizes="100vw"
+          fetchPriority="high"
+          loading="eager"
         />
 
         {/* blend into blue */}
@@ -110,7 +153,7 @@ export default function CorrectionalClubPage() {
 
       {/* Mobile hero */}
       <div className="block lg:hidden">
-        <MobileCorrectionalHero image={correctionalHeroImage} />
+        <MobileCorrectionalHero />
       </div>
 
       {/* Desktop hero */}
@@ -122,10 +165,15 @@ export default function CorrectionalClubPage() {
           animate={{ x: 0 }}
           transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
         >
-          <img
-            src={correctionalHeroImage}
-            alt="Корекційні заняття"
+          <ResponsiveImage
+            alt="Діти граються з кульками"
             className="w-full h-full object-cover"
+            sources={[
+              { src: logopedphoto1tablet, w: 1024 },
+              { src: logopedphoto1desktop, w: 1376 },
+              ]}
+            fetchPriority="high"
+            loading="eager"
           />
         </motion.div>
 

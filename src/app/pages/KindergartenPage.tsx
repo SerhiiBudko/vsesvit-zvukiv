@@ -1,4 +1,6 @@
-import kindergartenHeroImage from "@/assets/d4ea8ea83e5de95d25e9cfd6490d81b1f56a919c.png";
+import kindergardenHeroImageDesktop from "@/assets/kindergardenp1desktop.webp";
+import kindergardenHeroImageTablet from "@/assets/kindergardenp1tablet.webp";
+import kindergardenHeroImageMobile from "@/assets/kindergardenp1mobile.webp";
 import kindergartenExteriorImage from "@/assets/generalphoto.png";
 import kindergartenInteriorImage from "@/assets/5f8522679dafd3ef75bb99e6e2e6a375637b1054.png";
 import kindergartenphoto1 from "@/assets/photo1.JPG";
@@ -6,12 +8,12 @@ import kindergartenphoto2 from "@/assets/photo2.JPG";
 import kindergartenphoto3 from "@/assets/photo3.JPG";
 import kindergartenphoto4 from "@/assets/photo4.JPG";
 import kindergartenphoto5 from "@/assets/photo5.JPG";
-import kindergartenphoto6 from "@/assets/PhotoK6.png";
-import kindergartenphoto7 from "@/assets/PhotoK7.png";
-import kindergartenphoto8 from "@/assets/PhotoK8.png";
-import kindergartenphoto9 from "@/assets/PhotoK9.png";
-import kindergartenphoto10 from "@/assets/PhotoK10.png";
-import kindergartenphoto11 from "@/assets/PhotoK11.png";
+import kindergartenphoto6 from "@/assets/PhotoK6.webp";
+import kindergartenphoto7 from "@/assets/PhotoK7.webp";
+import kindergartenphoto8 from "@/assets/PhotoK8.webp";
+import kindergartenphoto9 from "@/assets/PhotoK9.webp";
+import kindergartenphoto10 from "@/assets/PhotoK10.webp";
+import kindergartenphoto11 from "@/assets/PhotoK11.webp";
 
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
@@ -23,9 +25,51 @@ import "slick-carousel/slick/slick-theme.css";
 import { useRef, useState } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
+type ImageSource = {
+  src: string;
+  w: number;
+  type?: string;
+};
+
+type ResponsiveImageProps = {
+  alt: string;
+  className?: string;
+  sources: ImageSource[];
+  sizes?: string;
+  fetchPriority?: "high" | "low" | "auto";
+  loading?: "eager" | "lazy";
+  decoding?: "async" | "auto" | "sync";
+};
+
+function ResponsiveImage({
+  alt,
+  className,
+  sources,
+  sizes,
+  fetchPriority,
+  loading,
+  decoding = "async",
+}: ResponsiveImageProps) {
+  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
+  const fallback = sources[0]?.src; // smallest as default
+
+  return (
+    <img
+      src={fallback}
+      srcSet={srcSet || undefined}
+      sizes={sizes}
+      alt={alt}
+      className={className}
+      loading={loading}
+      decoding={decoding}
+      fetchPriority={fetchPriority}
+    />
+  );
+}
+
 /* ================= MOBILE HERO ================= */
 
-function MobileKindergartenHero({ image }: { image: string }) {
+function MobileKindergartenHero() {
   return (
     <div className="bg-white overflow-hidden">
       {/* PHOTO (from right) */}
@@ -38,10 +82,13 @@ function MobileKindergartenHero({ image }: { image: string }) {
         {/* warm gradient behind image */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF7E6] via-[#FFFDF8] to-white" />
 
-        <ImageWithFallback
-          src={image}
-          alt="Дитячий садок - Всесвіт Звуків"
+        <ResponsiveImage
+          alt="Діти в садочку"
           className="relative z-10 w-full h-full object-cover"
+          sources={[{ src: kindergardenHeroImageMobile, w: 640 }]}
+          sizes="100vw"
+          fetchPriority="high"
+          loading="eager"
         />
 
         {/* blend into blue */}
@@ -82,7 +129,7 @@ export default function KindergartenPage() {
 
       {/* Mobile hero */}
       <div className="block lg:hidden">
-        <MobileKindergartenHero image={kindergartenHeroImage} />
+        <MobileKindergartenHero />
       </div>
 
       {/* Desktop hero (your existing one) */}
@@ -103,10 +150,15 @@ export default function KindergartenPage() {
           animate={{ x: 0 }}
           transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
         >
-          <img
-            src={kindergartenHeroImage}
-            alt="Діти граються разом"
+          <ResponsiveImage
+            alt="Діти в садочку"
             className="w-full h-full object-cover"
+            sources={[
+              { src: kindergardenHeroImageTablet, w: 1024 },
+              { src: kindergardenHeroImageDesktop, w: 1376 },
+              ]}
+            fetchPriority="high"
+            loading="eager"
           />
         </motion.div>
 

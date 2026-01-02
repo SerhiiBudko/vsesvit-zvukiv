@@ -13,8 +13,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           
           {/* Column 1: Logo and Company Info */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
+          <div className="space-y-6 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3">
               <div className="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center bg-white">
                 <img src={logoImage} alt="Всесвіт Звуків" className="w-full h-full object-cover" />
               </div>
@@ -28,7 +28,7 @@ export function Footer() {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Швидкі посилання</h3>
             <ul className="space-y-3">
               <li>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
 
           {/* Column 3: Contact Info */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Контакти</h3>
             <ul className="space-y-3 text-white/80">
               <li>
@@ -106,36 +106,36 @@ export function Footer() {
           </div>
 
           {/* Column 4: Location Info */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Локації</h3>
             <ul className="space-y-4 text-white/80">
               <li>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold mb-1">Дитячий садок</p>
-                    <p>проспект миру 31</p>
-                    <p>Кривий Ріг</p>
-                  </div>
+                <div>
+                  <p className="font-semibold mb-1 flex items-center justify-center md:justify-start gap-2">
+                    <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0" />
+                    Дитячий садок
+                  </p>
+                  <p>проспект миру 31</p>
+                  <p>Кривий Ріг</p>
                 </div>
               </li>
               <li>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold mb-1">Корекційний клуб</p>
-                    <p>просп.Центральний (Лермонтова), 16</p>
-                    <p>Кривий Ріг</p>
-                  </div>
+                <div>
+                  <p className="font-semibold mb-1 flex items-center justify-center md:justify-start gap-2">
+                    <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0" />
+                    Корекційний клуб
+                  </p>
+                  <p>просп.Центральний (Лермонтова), 16</p>
+                  <p>Кривий Ріг</p>
                 </div>
               </li>
             </ul>
           </div>
 
           {/* Column 5: Social Media */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Соціальні мережі</h3>
-            <div className="flex gap-4">
+            <div className="flex justify-center md:justify-start gap-4">
               <a 
                 href="https://www.instagram.com/vsesvit_zvukiv/" 
                 target="_blank"

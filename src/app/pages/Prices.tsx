@@ -515,7 +515,7 @@ export default function PricesPage() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#2E2E2E] mb-4">
-              Входить в оплату садка
+              Входить в оплату дитячого садка
             </h2>
             <p className="text-lg text-[#2E2E2E]/70 max-w-[700px] mx-auto">
               Додаткові заняття для гармонійного розвитку дитини

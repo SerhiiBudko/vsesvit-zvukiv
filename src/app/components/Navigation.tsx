@@ -1,16 +1,38 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import logoImage from "@/assets/5497a58c61619b80f23e22721bc1a0f52c06c371.png";
-import { Instagram, Facebook, X } from "lucide-react";
+import { Instagram, Facebook, X, ChevronDown } from "lucide-react";
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
+  const [pricesDropdownOpen, setPricesDropdownOpen] = useState(false);
+  const [mobilePricesOpen, setMobilePricesOpen] = useState(false);
   const location = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close menu on route change
   useEffect(() => {
     setOpen(false);
+    setPricesDropdownOpen(false);
+    setMobilePricesOpen(false);
   }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setPricesDropdownOpen(false);
+      }
+    };
+
+    if (pricesDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [pricesDropdownOpen]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -26,6 +48,11 @@ export function Navigation() {
     { label: "Дитячий садок", to: "/kindergarten" },
     { label: "Про нас", to: "/about" },
     { label: "Контакти та локація", to: "/contact" },
+  ];
+
+  const pricesSubmenu = [
+    { label: "Дитячий садок", to: "/prices" },
+    { label: "Корекційний клуб", to: "/correctional_club_prices" },
   ];
 
   return (
@@ -65,17 +92,77 @@ export function Navigation() {
                 <span className="relative font-medium">Головна</span>
               </Link>
             )}
-            {navLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group"
+            {/* Корекційний клуб */}
+            <Link
+              to="/correctional_club"
+              className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group"
+            >
+              <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative font-medium">Корекційний клуб</span>
+            </Link>
+            {/* Дитячий садок */}
+            <Link
+              to="/kindergarten"
+              className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group"
+            >
+              <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative font-medium">Дитячий садок</span>
+            </Link>
+            {/* Ціни Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setPricesDropdownOpen(!pricesDropdownOpen)}
+                className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group flex items-center gap-1"
+                onMouseEnter={() => setPricesDropdownOpen(true)}
               >
-                {/* Blue gradient background on hover */}
                 <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative font-medium">{l.label}</span>
-              </Link>
-            ))}
+                <span className="relative font-medium">Ціни</span>
+                <ChevronDown 
+                  className={`relative w-4 h-4 transition-transform duration-200 ${
+                    pricesDropdownOpen ? "rotate-180" : ""
+                  }`} 
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              {pricesDropdownOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[200px] z-50"
+                  onMouseLeave={() => setPricesDropdownOpen(false)}
+                >
+                  {pricesSubmenu.map((item) => {
+                    const isActive = location.pathname === item.to;
+                    return (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        className={`block px-4 py-2 text-[#2E2E2E] hover:bg-blue-50 transition-colors ${
+                          isActive ? "bg-blue-50 font-semibold" : ""
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            {/* Про нас */}
+            <Link
+              to="/about"
+              className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group"
+            >
+              <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative font-medium">Про нас</span>
+            </Link>
+            {/* Контакти та локація */}
+            <Link
+              to="/contact"
+              className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group"
+            >
+              <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative font-medium">Контакти та локація</span>
+            </Link>
           </div>
 
           {/* Right side: social + hamburger on mobile */}
@@ -154,22 +241,90 @@ export function Navigation() {
                     Головна
                   </Link>
                 )}
-                {navLinks.map((l) => {
-                  const active = location.pathname === l.to;
-                  return (
-                    <Link
-                      key={l.to}
-                      to={l.to}
-                      className={`block rounded-2xl px-4 py-4 font-semibold text-lg transition ${
-                        active
-                          ? "bg-[#003057] text-white"
-                          : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
-                      }`}
-                    >
-                      {l.label}
-                    </Link>
-                  );
-                })}
+                {/* Корекційний клуб */}
+                <Link
+                  to="/correctional_club"
+                  className={`block rounded-2xl px-4 py-4 font-semibold text-lg transition ${
+                    location.pathname === "/correctional_club"
+                      ? "bg-[#003057] text-white"
+                      : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                  }`}
+                >
+                  Корекційний клуб
+                </Link>
+                {/* Дитячий садок */}
+                <Link
+                  to="/kindergarten"
+                  className={`block rounded-2xl px-4 py-4 font-semibold text-lg transition ${
+                    location.pathname === "/kindergarten"
+                      ? "bg-[#003057] text-white"
+                      : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                  }`}
+                >
+                  Дитячий садок
+                </Link>
+                {/* Prices Dropdown for Mobile */}
+                <div>
+                  <button
+                    onClick={() => setMobilePricesOpen(!mobilePricesOpen)}
+                    className={`w-full rounded-2xl px-4 py-4 font-semibold text-lg transition flex items-center justify-between ${
+                      location.pathname === "/prices" || location.pathname === "/correctional_club_prices"
+                        ? "bg-[#003057] text-white"
+                        : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                    }`}
+                  >
+                    <span>Ціни</span>
+                    <ChevronDown 
+                      className={`w-5 h-5 transition-transform duration-200 ${
+                        mobilePricesOpen ? "rotate-180" : ""
+                      }`} 
+                    />
+                  </button>
+                  
+                  {/* Mobile Submenu */}
+                  {mobilePricesOpen && (
+                    <div className="mt-2 ml-4 space-y-2">
+                      {pricesSubmenu.map((item) => {
+                        const isActive = location.pathname === item.to;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            className={`block rounded-2xl px-4 py-3 font-medium text-base transition ${
+                              isActive
+                                ? "bg-[#003057] text-white"
+                                : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+                {/* Про нас */}
+                <Link
+                  to="/about"
+                  className={`block rounded-2xl px-4 py-4 font-semibold text-lg transition ${
+                    location.pathname === "/about"
+                      ? "bg-[#003057] text-white"
+                      : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                  }`}
+                >
+                  Про нас
+                </Link>
+                {/* Контакти та локація */}
+                <Link
+                  to="/contact"
+                  className={`block rounded-2xl px-4 py-4 font-semibold text-lg transition ${
+                    location.pathname === "/contact"
+                      ? "bg-[#003057] text-white"
+                      : "bg-[#FFFDF8] text-[#003057] hover:bg-[#003057]/10"
+                  }`}
+                >
+                  Контакти та локація
+                </Link>
               </div>
 
               {/* Social inside menu (optional, looks nice) */}

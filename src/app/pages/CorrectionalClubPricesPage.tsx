@@ -216,9 +216,7 @@ export default function CorrectionalClubPricesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="w-20 h-20 bg-[#FFB703]/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-10 h-10 text-[#FFB703]" />
-            </div>
+
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#2E2E2E] mb-4">
               Логопед та корекційний педагог
             </h2>
@@ -338,7 +336,7 @@ export default function CorrectionalClubPricesPage() {
 
                 <div className="text-center md:text-left lg:text-center">
                   <p className="text-[#2E2E2E]/60 text-sm leading-relaxed">
-                    Розумова відсталість, РДУГ та інші особливі потреби
+                    Розумова відсталість, РДУГ та інші особливі освітні потреби
                   </p>
                 </div>
 
@@ -417,7 +415,7 @@ export default function CorrectionalClubPricesPage() {
                     <span>1 раз на тиждень</span>
                   </div>
 
-                  <div className="pt-4 lg:pt-3 lg:border-t lg:border-gray-200">
+                  <div className="py-6 border-y border-gray-200 lg:py-0 lg:border-y-0 lg:pt-3 lg:border-t lg:border-gray-200">
                     <div className="flex items-baseline justify-center md:justify-start lg:justify-start gap-2">
                       <span className="text-4xl lg:text-5xl font-bold text-[#003060]">600</span>
                       <span className="text-lg lg:text-base text-[#2E2E2E]/60">грн за заняття</span>
@@ -456,7 +454,7 @@ export default function CorrectionalClubPricesPage() {
                     Різні види сенсорної дисфункції
                   </p>
 
-                  <div className="pt-4 lg:pt-3 lg:border-t lg:border-gray-200">
+                  <div className="py-6 border-y border-gray-200 lg:py-0 lg:border-y-0 lg:pt-3 lg:border-t lg:border-gray-200">
                     <div className="flex items-baseline justify-center md:justify-start lg:justify-start gap-2">
                       <span className="text-4xl lg:text-5xl font-bold text-[#003060]">400</span>
                       <span className="text-lg lg:text-base text-[#2E2E2E]/60">грн за заняття</span>
@@ -482,20 +480,20 @@ export default function CorrectionalClubPricesPage() {
                     <Hand className="w-8 h-8 text-[#FFB703]" />
                   </div>
                   <h3 className="text-2xl font-bold text-[#003060] lg:hidden">
-                    Дитячий загальний масаж
+                    Дитячий загальний масаж, Логомасаж
                   </h3>
                 </div>
                 
                 {/* Content - Right side on desktop */}
                 <div className="flex-1 space-y-4 lg:space-y-3 text-center md:text-left lg:text-left">
                   <h3 className="text-2xl font-bold text-[#003060] hidden lg:block lg:text-xl lg:mb-2">
-                    Дитячий загальний масаж
+                    Дитячий загальний масаж, Логомасаж
                   </h3>
                   <p className="text-[#2E2E2E]/70 lg:text-[#2E2E2E]/60 leading-relaxed lg:text-sm">
                     Тривалість: 30 хвилин
                   </p>
 
-                  <div className="pt-4 lg:pt-3 lg:border-t lg:border-gray-200">
+                  <div className="py-6 border-y border-gray-200 lg:py-0 lg:border-y-0 lg:pt-3 lg:border-t lg:border-gray-200">
                     <div className="flex items-baseline justify-center md:justify-start lg:justify-start gap-2">
                       <span className="text-4xl lg:text-5xl font-bold text-[#003060]">300</span>
                       <span className="text-lg lg:text-base text-[#2E2E2E]/60">грн за сеанс</span>
@@ -533,8 +531,11 @@ export default function CorrectionalClubPricesPage() {
                   <p className="text-[#2E2E2E]/70 lg:text-[#2E2E2E]/60 leading-relaxed lg:text-sm">
                     Розвиток музичних здібностей
                   </p>
+                  <p className="text-[#2E2E2E]/70 lg:text-[#2E2E2E]/60 leading-relaxed lg:text-sm">
+                    Тривалість: 30 хвилин
+                  </p>
 
-                  <div className="pt-4 lg:pt-3 lg:border-t lg:border-gray-200">
+                  <div className="py-6 border-y border-gray-200 lg:py-0 lg:border-y-0 lg:pt-3 lg:border-t lg:border-gray-200">
                     <div className="flex items-baseline justify-center md:justify-start lg:justify-start gap-2">
                       <span className="text-4xl lg:text-5xl font-bold text-[#003060]">250</span>
                       <span className="text-lg lg:text-base text-[#2E2E2E]/60">грн за заняття</span>

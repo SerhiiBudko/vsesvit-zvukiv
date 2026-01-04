@@ -43,13 +43,6 @@ export function Navigation() {
     };
   }, [open]);
 
-  const navLinks = [
-    { label: "Корекційний клуб", to: "/correctional_club" },
-    { label: "Дитячий садок", to: "/kindergarten" },
-    { label: "Про нас", to: "/about" },
-    { label: "Контакти та локація", to: "/contact" },
-  ];
-
   const pricesSubmenu = [
     { label: "Дитячий садок", to: "/prices" },
     { label: "Корекційний клуб", to: "/correctional_club_prices" },

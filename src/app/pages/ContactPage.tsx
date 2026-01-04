@@ -5,7 +5,7 @@ import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";
 import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
 import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
 import { motion } from "motion/react";
-import { Phone, Mail, Instagram, Facebook, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, Instagram, Facebook, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useState, FormEvent } from "react";
 
 type ImageSource = {
@@ -193,6 +193,21 @@ function EnrollmentFormSection() {
             </motion.p>
           </div>
 
+          {/* Error Message - Missing Access Key */}
+          {!accessKey && (
+            <motion.div
+              className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              <p className="text-red-800 font-medium">
+                Помилка конфігурації: форма тимчасово недоступна. Будь ласка, зв'яжіться з нами безпосередньо.
+              </p>
+            </motion.div>
+          )}
+
           {/* Success Message */}
           {isSuccess && (
             <motion.div
@@ -297,10 +312,10 @@ function EnrollmentFormSection() {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !accessKey}
               className="w-full py-4 px-6 rounded-xl bg-[#003060] text-white font-semibold text-lg flex items-center justify-center gap-3 hover:bg-[#002040] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
-              whileHover={{ scale: isLoading ? 1 : 1.02 }}
-              whileTap={{ scale: isLoading ? 1 : 0.98 }}
+              whileHover={{ scale: isLoading || !accessKey ? 1 : 1.02 }}
+              whileTap={{ scale: isLoading || !accessKey ? 1 : 0.98 }}
             >
               {isLoading ? (
                 <>

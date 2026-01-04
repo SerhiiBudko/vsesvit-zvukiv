@@ -5,7 +5,8 @@ import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";
 import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
 import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
 import { motion } from "motion/react";
-import { Phone, Mail, Instagram, Facebook, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, Instagram, Facebook, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { useState, FormEvent } from "react";
 
 type ImageSource = {
   src: string;
@@ -101,6 +102,222 @@ function MobileContactHero() {
         </p>
       </motion.div>
     </div>
+  );
+}
+
+/* ================= ENROLLMENT FORM SECTION ================= */
+
+/**
+ * ENROLLMENT FORM - Web3Forms Integration
+ * 
+ * SETUP INSTRUCTIONS:
+ * 1. Copy .env.example to .env.local
+ * 2. Add your Web3Forms access key to .env.local:
+ *    VITE_WEB3FORMS_ACCESS_KEY=your_actual_key_here
+ * 3. Restart the dev server after adding env variables
+ * 4. NEVER commit .env.local to git!
+ */
+function EnrollmentFormSection() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  // Get access key from environment variable
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Runtime guard: prevent submission if key is missing
+    if (!accessKey) {
+      console.error(
+        "❌ Web3Forms Error: VITE_WEB3FORMS_ACCESS_KEY is not set.\n" +
+        "Please add your key to .env.local and restart the dev server."
+      );
+      return;
+    }
+
+    setIsLoading(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        form.reset();
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSuccess(false), 5000);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <section className="py-20 lg:py-28 bg-[#FFFDF8] pb-32 md:pb-20 lg:pb-28">
+      <div className="max-w-[800px] mx-auto px-8 lg:px-12">
+        <motion.div
+          className="bg-white rounded-3xl p-8 lg:p-12"
+          style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.42, 0, 0.58, 1] }}
+        >
+          {/* Section Header */}
+          <div className="text-center mb-10">
+            <motion.h2
+              className="text-3xl lg:text-4xl font-bold text-[#003060] mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Записатись на консультацію
+            </motion.h2>
+            <motion.p
+              className="text-lg text-[#2E2E2E]/70"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Заповніть форму, і ми зв'яжемося з вами найближчим часом
+            </motion.p>
+          </div>
+
+          {/* Success Message */}
+          {isSuccess && (
+            <motion.div
+              className="mb-8 p-4 bg-green-50 border border-green-200 rounded-2xl flex items-center gap-3"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+              <p className="text-green-800 font-medium">
+                Заявку надіслано, Ми з вами зв'яжемося!
+              </p>
+            </motion.div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Hidden Web3Forms fields */}
+            <input type="hidden" name="access_key" value={accessKey || ""} />
+            <input type="hidden" name="subject" value="Нова заявка для Всесвіт Звуків" />
+            <input type="hidden" name="from_name" value="Всесвіт Звуків" />
+
+            {/* Parent Name */}
+            <div>
+              <label htmlFor="parent_name" className="block text-sm font-semibold text-[#003060] mb-2">
+                Ім'я батька/матері *
+              </label>
+              <input
+                type="text"
+                id="parent_name"
+                name="parent_name"
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E]"
+                placeholder="Введіть ваше ім'я"
+              />
+            </div>
+
+            {/* Phone Number */}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-semibold text-[#003060] mb-2">
+                Номер телефону *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E]"
+                placeholder="+380 XX XXX XX XX"
+              />
+            </div>
+
+            {/* Two columns for Child Age and Direction */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Child Age - First on mobile, first on desktop */}
+              <div>
+                <label htmlFor="child_age" className="block text-sm font-semibold text-[#003060] mb-2">
+                  Вік дитини
+                </label>
+                <input
+                  type="text"
+                  id="child_age"
+                  name="child_age"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E]"
+                  placeholder="Наприклад: 3 роки"
+                />
+              </div>
+
+              {/* Direction - Second on mobile (below), second on desktop */}
+              <div className="mb-4 md:mb-0">
+                <label htmlFor="direction" className="block text-sm font-semibold text-[#003060] mb-2">
+                  Напрямок *
+                </label>
+                <select
+                  id="direction"
+                  name="direction"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E] bg-white"
+                >
+                  <option value="">Оберіть напрямок</option>
+                  <option value="Дитячий садок">Дитячий садок</option>
+                  <option value="Корекційний клуб">Корекційний клуб</option>
+                  <option value="Логопед">Логопед</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Comment */}
+            <div>
+              <label htmlFor="comment" className="block text-sm font-semibold text-[#003060] mb-2">
+                Коментар
+              </label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows={4}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E] resize-none"
+                placeholder="Додаткова інформація або запитання..."
+              />
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-4 px-6 rounded-xl bg-[#003060] text-white font-semibold text-lg flex items-center justify-center gap-3 hover:bg-[#002040] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+              whileHover={{ scale: isLoading ? 1 : 1.02 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
+            >
+              {isLoading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span>Надсилаємо...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  <span>Забронювати місце</span>
+                </>
+              )}
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
@@ -201,6 +418,9 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* ================= ENROLLMENT FORM ================= */}
+      <EnrollmentFormSection />
 
       {/* ================= CONTACT INFORMATION ================= */}
       <section className="py-20 lg:py-28" style={{ backgroundColor: "#F5EFE0" }}>

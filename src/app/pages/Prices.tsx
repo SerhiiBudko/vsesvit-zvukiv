@@ -225,7 +225,7 @@ export default function PricesPage() {
             
             {/* Card 1: Full Day */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -235,55 +235,57 @@ export default function PricesPage() {
               {/* Decorative gradient */}
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#FFB703] to-[#FFD966]" />
               
-              <div className="space-y-6">
-                {/* Icon */}
-                <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
-                  <Clock className="w-8 h-8 text-[#FFB703]" />
-                </div>
-
-                {/* Title */}
-                <div className="text-center md:text-left lg:text-center">
-                  <h3 className="text-2xl font-bold text-[#003060] mb-2">
-                    Повний день
-                  </h3>
-                  <p className="text-[#2E2E2E]/60">
-                    5 днів на тиждень
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
-                  <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
-                    <span className="text-5xl font-bold text-[#003060]">7000</span>
-                    <span className="text-xl text-[#2E2E2E]/60">грн</span>
+              <div className="flex flex-col h-full">
+                <div className="flex-1 space-y-6">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
+                    <Clock className="w-8 h-8 text-[#FFB703]" />
                   </div>
-                  <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
-                </div>
 
-                {/* Features */}
-                <div className="flex justify-center md:justify-start lg:justify-center">
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Повний робочий день</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Понеділок - П'ятниця</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">8:30 - 16:00</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Всі освітні програми</span>
-                    </li>
-                  </ul> 
+                  {/* Title */}
+                  <div className="text-center md:text-left lg:text-center">
+                    <h3 className="text-2xl font-bold text-[#003060] mb-2">
+                      Повний день
+                    </h3>
+                    <p className="text-[#2E2E2E]/60">
+                      5 днів на тиждень
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
+                    <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
+                      <span className="text-5xl font-bold text-[#003060]">7000</span>
+                      <span className="text-xl text-[#2E2E2E]/60">грн</span>
+                    </div>
+                    <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="flex justify-center md:justify-start lg:justify-center">
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Повний робочий день</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Понеділок - П'ятниця</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">8:30 - 16:00</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Всі освітні програми</span>
+                      </li>
+                    </ul> 
+                  </div>
                 </div>
 
                 {/* CTA Button */}
-                <Button variant="primary" size="md" href="/contact" className="w-full">
+                <Button variant="primary" size="md" href="/contact" className="w-full mt-6">
                   Записатися
                 </Button>
               </div>
@@ -291,7 +293,7 @@ export default function PricesPage() {
 
             {/* Card 2: Half Day */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden border-2 border-[#FFB703]"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden border-2 border-[#FFB703] flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -301,62 +303,64 @@ export default function PricesPage() {
               {/* Decorative gradient - with rounded corners matching container */}
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#FFB703] to-[#FFD966] rounded-t-3xl" />
               
-              <div className="space-y-6">
-                {/* Icon */}
-                <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
-                  <Users className="w-8 h-8 text-[#FFB703]" />
-                </div>
-
-                {/* Popular badge */}
-                <div className="flex justify-center md:justify-start lg:justify-center">
-                  <div className="bg-[#FFB703] text-[#003060] px-5 py-2 rounded-full text-sm font-bold shadow-lg">
-                    Популярне
+              <div className="flex flex-col h-full">
+                <div className="flex-1 space-y-6">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
+                    <Users className="w-8 h-8 text-[#FFB703]" />
                   </div>
-                </div>
 
-                {/* Title */}
-                <div className="text-center md:text-left lg:text-center">
-                  <h3 className="text-2xl font-bold text-[#003060] mb-2">
-                    Половина дня
-                  </h3>
-                  <p className="text-[#2E2E2E]/60">
-                    "Вільна мама"
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
-                  <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
-                    <span className="text-5xl font-bold text-[#003060]">4000</span>
-                    <span className="text-xl text-[#2E2E2E]/60">грн</span>
+                  {/* Popular badge */}
+                  <div className="flex justify-center md:justify-start lg:justify-center">
+                    <div className="bg-[#FFB703] text-[#003060] px-5 py-2 rounded-full text-sm font-bold shadow-lg">
+                      Популярне
+                    </div>
                   </div>
-                  <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
-                </div>
 
-                {/* Features */}
-                <div className="flex justify-center md:justify-start lg:justify-center">
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">5 днів на тиждень</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Понеділок - П'ятниця</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">8:30 - 13:00</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Основні освітні програми</span>
-                    </li>
-                  </ul>
+                  {/* Title */}
+                  <div className="text-center md:text-left lg:text-center">
+                    <h3 className="text-2xl font-bold text-[#003060] mb-2">
+                      Половина дня
+                    </h3>
+                    <p className="text-[#2E2E2E]/60">
+                      "Вільна мама"
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
+                    <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
+                      <span className="text-5xl font-bold text-[#003060]">4000</span>
+                      <span className="text-xl text-[#2E2E2E]/60">грн</span>
+                    </div>
+                    <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="flex justify-center md:justify-start lg:justify-center">
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">5 днів на тиждень</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Понеділок - П'ятниця</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">8:30 - 13:00</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Основні освітні програми</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* CTA Button */}
-                <Button variant="primary" size="md" href="/contact" className="w-full">
+                <Button variant="primary" size="md" href="/contact" className="w-full mt-6">
                   Записатися
                 </Button>
               </div>
@@ -364,7 +368,7 @@ export default function PricesPage() {
 
             {/* Card 3: Flexible Schedule */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -374,55 +378,57 @@ export default function PricesPage() {
               {/* Decorative gradient */}
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#FFB703] to-[#FFD966]" />
               
-              <div className="space-y-6">
-                {/* Icon */}
-                <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
-                  <Calendar className="w-8 h-8 text-[#FFB703]" />
-                </div>
-
-                {/* Title */}
-                <div className="text-center md:text-left lg:text-center">
-                  <h3 className="text-2xl font-bold text-[#003060] mb-2">
-                    Гнучкий графік
-                  </h3>
-                  <p className="text-[#2E2E2E]/60">
-                    3 дні на тиждень
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
-                  <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
-                    <span className="text-5xl font-bold text-[#003060]">4000</span>
-                    <span className="text-xl text-[#2E2E2E]/60">грн</span>
+              <div className="flex flex-col h-full">
+                <div className="flex-1 space-y-6">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-[#FFB703]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 lg:mx-auto">
+                    <Calendar className="w-8 h-8 text-[#FFB703]" />
                   </div>
-                  <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
-                </div>
 
-                {/* Features */}
-                <div className="flex justify-center md:justify-start lg:justify-center">
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Виберіть 3 дні</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Гнучкий розклад</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Повний день</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2E2E2E]/80">Всі освітні програми</span>
-                    </li>
-                  </ul>
+                  {/* Title */}
+                  <div className="text-center md:text-left lg:text-center">
+                    <h3 className="text-2xl font-bold text-[#003060] mb-2">
+                      Гнучкий графік
+                    </h3>
+                    <p className="text-[#2E2E2E]/60">
+                      3 дні на тиждень
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="py-6 border-y border-gray-200 text-center md:text-left lg:text-center">
+                    <div className="flex items-baseline gap-2 justify-center md:justify-start lg:justify-center">
+                      <span className="text-5xl font-bold text-[#003060]">4000</span>
+                      <span className="text-xl text-[#2E2E2E]/60">грн</span>
+                    </div>
+                    <p className="text-[#2E2E2E]/60 mt-1">на місяць</p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="flex justify-center md:justify-start lg:justify-center">
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Виберіть 3 дні</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Гнучкий розклад</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Повний день</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-[#FFB703] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#2E2E2E]/80">Всі освітні програми</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* CTA Button */}
-                <Button variant="primary" size="md" href="/contact" className="w-full">
+                <Button variant="primary" size="md" href="/contact" className="w-full mt-6">
                   Записатися
                 </Button>
               </div>

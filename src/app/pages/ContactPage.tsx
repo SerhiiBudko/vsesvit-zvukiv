@@ -290,7 +290,6 @@ function EnrollmentFormSection() {
                   <option value="">Оберіть напрямок</option>
                   <option value="Дитячий садок">Дитячий садок</option>
                   <option value="Корекційний клуб">Корекційний клуб</option>
-                  <option value="Логопед">Логопед</option>
                 </select>
               </div>
             </div>

@@ -23,33 +23,24 @@ export function GoogleAnalytics() {
 
     console.log('Google Analytics: Initializing with ID:', GA_MEASUREMENT_ID);
 
-    // Initialize dataLayer first
-    window.dataLayer = window.dataLayer || [];
-    
-    // Define gtag function before script loads (commands will queue in dataLayer)
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
-    window.gtag = gtag;
-
-    // Load gtag.js script
+    // dataLayer and gtag are already initialized in index.html <head>
+    // Just load the gtag.js script
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     
-    // Wait for script to load before configuring
     script.onload = () => {
-      console.log('Google Analytics: Script loaded successfully');
-      gtag('js', new Date());
-      gtag('config', GA_MEASUREMENT_ID, {
+      console.log('Google Analytics: Script loaded, configuring...');
+      // gtag is already available from index.html
+      window.gtag('js', new Date());
+      window.gtag('config', GA_MEASUREMENT_ID, {
         send_page_view: false, // We handle page views manually for React Router
       });
-      console.log('Google Analytics: Configuration sent, dataLayer:', window.dataLayer);
+      console.log('Google Analytics: Configuration sent');
     };
     
-    // Handle script load errors
     script.onerror = () => {
-      console.error('Google Analytics: Failed to load script - check CSP settings');
+      console.error('Google Analytics: Failed to load script');
     };
     
     document.head.appendChild(script);

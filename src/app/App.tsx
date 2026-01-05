@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -7,11 +8,27 @@ import CorrectionalClubPage from "./pages/CorrectionalClubPage";
 import PricesPage from "./pages/Prices";
 import CorrectionalClubPricesPage from "./pages/CorrectionalClubPricesPage";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
+import { trackPageView } from "../utils/analytics";
+
+// Component to track page views on route changes
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view when route changes
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
+  return null;
+}
 
 export default function App() {
   return (
     <BrowserRouter>
+      <GoogleAnalytics />
       <ScrollToTop />
+      <AnalyticsTracker />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

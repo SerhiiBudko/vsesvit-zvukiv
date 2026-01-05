@@ -7,6 +7,7 @@ import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
 import { motion } from "motion/react";
 import { Phone, Mail, Instagram, Facebook, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useState, FormEvent } from "react";
+import { trackFormSubmission } from "../../utils/analytics";
 
 type ImageSource = {
   src: string;
@@ -150,6 +151,8 @@ function EnrollmentFormSection() {
       if (response.ok) {
         setIsSuccess(true);
         form.reset();
+        // Track form submission in Google Analytics
+        trackFormSubmission("enrollment_form");
         // Reset success message after 5 seconds
         setTimeout(() => setIsSuccess(false), 5000);
       }

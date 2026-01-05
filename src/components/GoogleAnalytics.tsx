@@ -21,26 +21,37 @@ export function GoogleAnalytics() {
       return;
     }
 
-    // Load gtag.js script
-    const script1 = document.createElement('script');
-    script1.async = true;
-    script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(script1);
-
-    // Initialize dataLayer and gtag
+    // Initialize dataLayer first
     window.dataLayer = window.dataLayer || [];
+    
+    // Define gtag function before script loads (commands will queue in dataLayer)
     function gtag(...args: any[]) {
       window.dataLayer.push(args);
     }
     window.gtag = gtag;
 
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID, {
-      send_page_view: false, // We handle page views manually for React Router
-    });
+    // Load gtag.js script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    
+    // Wait for script to load before configuring
+    script.onload = () => {
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, {
+        send_page_view: false, // We handle page views manually for React Router
+      });
+    };
+    
+    // Handle script load errors
+    script.onerror = () => {
+      console.error('Failed to load Google Analytics script');
+    };
+    
+    document.head.appendChild(script);
 
     return () => {
-      // Cleanup: remove script if component unmounts (shouldn't happen in normal use)
+      // Cleanup: remove script if component unmounts
       const existingScript = document.querySelector(
         `script[src*="googletagmanager.com/gtag/js"]`
       );

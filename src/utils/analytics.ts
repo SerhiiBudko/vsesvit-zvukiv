@@ -26,10 +26,22 @@ declare global {
  * Track a page view
  */
 export function trackPageView(path: string, title?: string) {
-  if (typeof window === 'undefined' || !window.gtag || !GA_MEASUREMENT_ID) {
+  if (typeof window === 'undefined') {
+    console.warn('Google Analytics: window is undefined');
+    return;
+  }
+  
+  if (!window.gtag) {
+    console.warn('Google Analytics: gtag function not available yet');
+    return;
+  }
+  
+  if (!GA_MEASUREMENT_ID) {
+    console.warn('Google Analytics: Measurement ID not configured');
     return;
   }
 
+  console.log('Google Analytics: Tracking page view', path);
   window.gtag('config', GA_MEASUREMENT_ID, {
     page_path: path,
     page_title: title || document.title,

@@ -21,6 +21,8 @@ export function GoogleAnalytics() {
       return;
     }
 
+    console.log('Google Analytics: Initializing with ID:', GA_MEASUREMENT_ID);
+
     // Initialize dataLayer first
     window.dataLayer = window.dataLayer || [];
     
@@ -37,15 +39,17 @@ export function GoogleAnalytics() {
     
     // Wait for script to load before configuring
     script.onload = () => {
+      console.log('Google Analytics: Script loaded successfully');
       gtag('js', new Date());
       gtag('config', GA_MEASUREMENT_ID, {
         send_page_view: false, // We handle page views manually for React Router
       });
+      console.log('Google Analytics: Configuration sent, dataLayer:', window.dataLayer);
     };
     
     // Handle script load errors
     script.onerror = () => {
-      console.error('Failed to load Google Analytics script');
+      console.error('Google Analytics: Failed to load script - check CSP settings');
     };
     
     document.head.appendChild(script);

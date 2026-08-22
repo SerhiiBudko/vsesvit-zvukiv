@@ -1,24 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!DOCTYPE html>
-  <html lang="uk">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-      <title>Всесвіт Звуків</title>
-      
-      <!-- Google Analytics - Initialize dataLayer in <head> as recommended -->
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag;
-      </script>
-    </head>
+    <title>Всесвіт Звуків — дитячий садок та корекційний клуб у Кривому Розі</title>
+    <meta
+      name="description"
+      content="Дитячий садок та корекційний клуб «Всесвіт Звуків» у Кривому Розі. Логопедичні заняття, корекція мовлення та розвиток дітей з досвідченими фахівцями."
+    />
+    <link rel="canonical" href="https://www.vsesvit-zvukiv.com.ua/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#003060" />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph (Facebook, Viber, Telegram link previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Всесвіт Звуків" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta
+      property="og:title"
+      content="Всесвіт Звуків — дитячий садок та корекційний клуб у Кривому Розі"
+    />
+    <meta
+      property="og:description"
+      content="Логопедичні заняття, корекція мовлення та розвиток дітей з досвідченими фахівцями."
+    />
+    <meta property="og:url" content="https://www.vsesvit-zvukiv.com.ua/" />
+    <meta property="og:image" content="https://www.vsesvit-zvukiv.com.ua/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Діти граються у дитячому садку «Всесвіт Звуків»" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Всесвіт Звуків — дитячий садок та корекційний клуб у Кривому Розі"
+    />
+    <meta
+      name="twitter:description"
+      content="Логопедичні заняття, корекція мовлення та розвиток дітей з досвідченими фахівцями."
+    />
+    <meta name="twitter:image" content="https://www.vsesvit-zvukiv.com.ua/og-image.jpg" />
+
+    <!-- Local-business structured data, so Google can show address and hours -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ChildCare",
+        "name": "Всесвіт Звуків",
+        "description": "Дитячий садок та корекційний клуб у Кривому Розі. Логопедичні заняття, корекція мовлення та розвиток дітей.",
+        "url": "https://www.vsesvit-zvukiv.com.ua/",
+        "image": "https://www.vsesvit-zvukiv.com.ua/og-image.jpg",
+        "telephone": ["+380987196649", "+380672101516"],
+        "email": "budko79t@gmail.com",
+        "sameAs": [
+          "https://www.instagram.com/vsesvit_zvukiv/",
+          "https://www.facebook.com/tetana.budko.2025"
+        ],
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Проспект Університетський 51",
+            "addressLocality": "Кривий Ріг",
+            "addressCountry": "UA"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "просп. Центральний (Лермонтова), 16",
+            "addressLocality": "Кривий Ріг",
+            "addressCountry": "UA"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Google Analytics - Initialize dataLayer in <head> as recommended -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'outline';
@@ -5,6 +7,11 @@ interface ButtonProps {
   onClick?: () => void;
   href?: string;
   className?: string;
+}
+
+/** Internal app routes start with a single "/" — "//host" is external. */
+function isInternalRoute(href: string) {
+  return href.startsWith('/') && !href.startsWith('//');
 }
 
 export function Button({ 
@@ -32,8 +39,26 @@ export function Button({
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
   
   if (href) {
+    // Route within the app: navigate client-side instead of reloading the
+    // whole bundle. Anything else (tel:, mailto:, maps links) stays an <a>.
+    if (isInternalRoute(href)) {
+      return (
+        <Link to={href} className={classes}>
+          {children}
+        </Link>
+      );
+    }
+
+    const isExternalSite = /^https?:\/\//i.test(href);
+
     return (
-      <a href={href} className={classes}>
+      <a
+        href={href}
+        className={classes}
+        {...(isExternalSite
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
+      >
         {children}
       </a>
     );

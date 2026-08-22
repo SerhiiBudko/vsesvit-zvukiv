@@ -1,4 +1,7 @@
 import teacherImage from "@/assets/4a52e4a61a78df7e73a78d08c3883b149cd72988.webp";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { HeroPanel } from "../components/HeroPanel";
+import { PageMeta } from "../components/PageMeta";
 import parentChildImage from "@/assets/7ef5bb868035840156acaedc3d1b8b01a05331ce.webp";
 import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
 import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
@@ -9,52 +12,16 @@ import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
 import { CircleCheck } from "lucide-react";
 
-type ImageSource = {
-  src: string;
-  w: number;
-  type?: string;
-};
-
-type ResponsiveImageProps = {
-  alt: string;
-  className?: string;
-  sources: ImageSource[];
-  sizes?: string;
-  fetchPriority?: "high" | "low" | "auto";
-  loading?: "eager" | "lazy";
-  decoding?: "async" | "auto" | "sync";
-};
-
-function ResponsiveImage({
-  alt,
-  className,
-  sources,
-  sizes,
-  fetchPriority,
-  loading,
-  decoding = "async",
-}: ResponsiveImageProps) {
-  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
-  const fallback = sources[0]?.src; // smallest as default
-
-  return (
-    <img
-      src={fallback}
-      srcSet={srcSet || undefined}
-      sizes={sizes}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding={decoding}
-      fetchPriority={fetchPriority}
-    />
-  );
-}
 
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Дитячий садок та корекційний клуб у Кривому Розі"
+        description="Дитячий садок та корекційний клуб «Всесвіт Звуків» у Кривому Розі. Логопедичні заняття, корекція мовлення та розвиток дітей."
+        path="/"
+      />
       <Navigation />
 
       {/* ================= HERO (MOBILE + DESKTOP) ================= */}
@@ -84,6 +51,8 @@ export default function HomePage() {
                 src={teacherImage}
                 alt="Педагог з дітьми"
                 className="w-full h-full object-cover"
+                width={1376}
+                height={768}
                 loading="lazy"
                 decoding="async"
               />
@@ -220,6 +189,8 @@ export default function HomePage() {
                   src={parentChildImage}
                   alt="Щаслива мама з дитиною"
                   className="w-full h-full object-cover"
+                  width={1376}
+                  height={768}
                   loading="lazy"
                   decoding="async"
                 />
@@ -299,12 +270,7 @@ function DesktopHero() {
       </svg>
 
       {/* Full Background Photo - Animate from RIGHT */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-      >
+      <HeroPanel from="right">
         <ResponsiveImage
           alt="Діти граються з кульками"
           className="w-full h-full object-cover"
@@ -319,15 +285,10 @@ function DesktopHero() {
           loading="eager"
         />
 
-      </motion.div>
+      </HeroPanel>
 
       {/* Navy Panel - Animate from LEFT */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ x: "-100%" }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-      >
+      <HeroPanel from="left">
         <svg width="100%" height="100%" viewBox="0 0 1440 640" preserveAspectRatio="none">
           <defs>
             <clipPath id="navy-clip">
@@ -336,7 +297,7 @@ function DesktopHero() {
           </defs>
           <rect width="1440" height="640" fill="#003060" clipPath="url(#navy-clip)" />
         </svg>
-      </motion.div>
+      </HeroPanel>
 
       {/* Content - Left Aligned */}
       <div className="relative z-10 h-full flex items-center">

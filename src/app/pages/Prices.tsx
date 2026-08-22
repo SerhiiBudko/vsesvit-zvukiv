@@ -1,52 +1,16 @@
 import { Navigation } from "../components/Navigation";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { HeroPanel } from "../components/HeroPanel";
+import { PageMeta } from "../components/PageMeta";
 import { Footer } from "../components/Footer";
 import { Button } from "../components/Button";
+import { PRIMARY_PHONE } from "@/constants/contact";
 import { motion } from "motion/react";
 import priceheroimage from "@/assets/prices1.webp";
 import priceheroimagemobile from "@/assets/prices1_mobile.webp";
 import { Check, Clock, Users, Calendar, UtensilsCrossed, Music, Activity, Brain } from "lucide-react";
 
-type ImageSource = {
-  src: string;
-  w: number;
-  type?: string;
-};
 
-type ResponsiveImageProps = {
-  alt: string;
-  className?: string;
-  sources: ImageSource[];
-  sizes?: string;
-  fetchPriority?: "high" | "low" | "auto";
-  loading?: "eager" | "lazy";
-  decoding?: "async" | "auto" | "sync";
-};
-
-function ResponsiveImage({
-  alt,
-  className,
-  sources,
-  sizes,
-  fetchPriority,
-  loading,
-  decoding = "async",
-}: ResponsiveImageProps) {
-  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
-  const fallback = sources[0]?.src; // smallest as default
-
-  return (
-    <img
-      src={fallback}
-      srcSet={srcSet || undefined}
-      sizes={sizes}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding={decoding}
-      fetchPriority={fetchPriority}
-    />
-  );
-}
 
 /* ================= MOBILE HERO ================= */
 
@@ -108,6 +72,11 @@ function MobileCorrectionalPriceHero() {
 export default function PricesPage() {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Ціни — дитячий садок"
+        description="Ціни на послуги дитячого садка «Всесвіт Звуків» у Кривому Розі. Тарифи, що входить у вартість та умови запису."
+        path="/prices"
+      />
       <Navigation />
 
       {/* ================= HERO SECTION ================= */}
@@ -119,12 +88,7 @@ export default function PricesPage() {
       {/* Desktop hero */}
       <section className="relative overflow-hidden bg-white hidden lg:block" style={{ height: "640px" }}>
         {/* Full Background Photo - Animate from RIGHT */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-        >
+        <HeroPanel from="right">
           <ResponsiveImage
             alt="Діти граються з кульками"
             className="w-full h-full object-cover"
@@ -135,7 +99,7 @@ export default function PricesPage() {
             fetchPriority="high"
             loading="eager"
           />
-        </motion.div>
+        </HeroPanel>
 
         {/* Navy Panel with Concave Semicircle Cut-out - Animate from LEFT */}
         <motion.div 
@@ -647,7 +611,7 @@ export default function PricesPage() {
               <Button variant="secondary" size="lg" href="/contact">
                 Записатися на екскурсію
               </Button>
-              <Button variant="outline" size="lg" href="tel:+380501234567">
+              <Button variant="outline" size="lg" href={PRIMARY_PHONE.href}>
                 Зателефонувати нам
               </Button>
             </div>

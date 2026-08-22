@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import logoImage from "@/assets/5497a58c61619b80f23e22721bc1a0f52c06c371.png";
+import logoImage from "@/assets/logo-vsesvit.webp";
 import { Facebook, Instagram, ArrowUp, MapPin, ChevronDown } from "lucide-react";
+import { PHONES, EMAIL, SOCIALS, LOCATIONS, CITY } from "@/constants/contact";
 
 export function Footer() {
   const [pricesDropdownOpen, setPricesDropdownOpen] = useState(false);
@@ -42,7 +43,15 @@ export function Footer() {
           <div className="space-y-6 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
               <div className="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center bg-white">
-                <img src={logoImage} alt="Всесвіт Звуків" className="w-full h-full object-cover" />
+                <img
+                  src={logoImage}
+                  alt="Всесвіт Звуків"
+                  className="w-full h-full object-cover"
+                  width={56}
+                  height={56}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <span className="text-xl font-bold text-white">
                 Всесвіт Звуків
@@ -139,28 +148,22 @@ export function Footer() {
           <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Контакти</h3>
             <ul className="space-y-3 text-white/80">
+              {PHONES.map((phone) => (
+                <li key={phone.href}>
+                  <a
+                    href={phone.href}
+                    className="hover:text-[#FFB703] transition-colors duration-300"
+                  >
+                    {phone.label}
+                  </a>
+                </li>
+              ))}
               <li>
-                <a 
-                  href="tel:+380987196649" 
+                <a
+                  href={EMAIL.href}
                   className="hover:text-[#FFB703] transition-colors duration-300"
                 >
-                  +380-98-719-66-49
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="tel:+380672101516" 
-                  className="hover:text-[#FFB703] transition-colors duration-300"
-                >
-                  +380-67-210-15-16
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="mailto:budko79t@gmail.com" 
-                  className="hover:text-[#FFB703] transition-colors duration-300"
-                >
-                  budko79t@gmail.com
+                  {EMAIL.label}
                 </a>
               </li>
             </ul>
@@ -170,26 +173,18 @@ export function Footer() {
           <div className="space-y-4 text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Локації</h3>
             <ul className="space-y-4 text-white/80">
-              <li>
-                <div>
-                  <p className="font-semibold mb-1 flex items-center justify-center md:justify-start gap-2">
-                    <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0" />
-                    Дитячий садок
-                  </p>
-                  <p>проспект миру 31</p>
-                  <p>Кривий Ріг</p>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <p className="font-semibold mb-1 flex items-center justify-center md:justify-start gap-2">
-                    <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0" />
-                    Корекційний клуб
-                  </p>
-                  <p>просп.Центральний (Лермонтова), 16</p>
-                  <p>Кривий Ріг</p>
-                </div>
-              </li>
+              {LOCATIONS.map((location) => (
+                <li key={location.name}>
+                  <div>
+                    <p className="font-semibold mb-1 flex items-center justify-center md:justify-start gap-2">
+                      <MapPin className="w-5 h-5 text-[#FFB703] flex-shrink-0" />
+                      {location.name}
+                    </p>
+                    <p>{location.street}</p>
+                    <p>{CITY}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -198,7 +193,7 @@ export function Footer() {
             <h3 className="text-xl font-bold mb-4">Соціальні мережі</h3>
             <div className="flex justify-center md:justify-start gap-4">
               <a 
-                href="https://www.instagram.com/vsesvit_zvukiv/" 
+                href={SOCIALS.instagram} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -209,7 +204,7 @@ export function Footer() {
                 <Instagram className="w-6 h-6 text-white" />
               </a>
               <a 
-                href="https://www.facebook.com/tetana.budko.2025" 
+                href={SOCIALS.facebook} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-[#1877F2] flex items-center justify-center hover:scale-110 transition-transform duration-300"

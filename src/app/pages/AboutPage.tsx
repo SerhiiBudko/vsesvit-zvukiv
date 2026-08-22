@@ -3,6 +3,8 @@ import {
   MessageCircle,
   ArrowRight,
 } from "lucide-react";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { PageMeta } from "../components/PageMeta";
 import { Button } from "../components/Button";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Navigation } from "../components/Navigation";
@@ -20,47 +22,7 @@ import partnershipImage from "@/assets/aboutusp5.webp";
 import chooseDirectionImage from "@/assets/aboutusp6.webp";
 
 
-type ImageSource = {
-  src: string;
-  w: number;
-  type?: string;
-};
 
-type ResponsiveImageProps = {
-  alt: string;
-  className?: string;
-  sources: ImageSource[];
-  sizes?: string;
-  fetchPriority?: "high" | "low" | "auto";
-  loading?: "eager" | "lazy";
-  decoding?: "async" | "auto" | "sync";
-};
-
-function ResponsiveImage({
-  alt,
-  className,
-  sources,
-  sizes,
-  fetchPriority,
-  loading,
-  decoding = "async",
-}: ResponsiveImageProps) {
-  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
-  const fallback = sources[0]?.src; // smallest as default
-
-  return (
-    <img
-      src={fallback}
-      srcSet={srcSet || undefined}
-      sizes={sizes}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding={decoding}
-      fetchPriority={fetchPriority}
-    />
-  );
-}
 
 /* ================= MOBILE HERO ================= */
 
@@ -145,6 +107,10 @@ function ChooseDirectionSection() {
               src={chooseDirectionImage}
               alt="Педагог з батьком та дитиною"
               className="w-full h-full object-cover aspect-[4/3]"
+              width={1024}
+              height={768}
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
 
@@ -228,6 +194,11 @@ function ChooseDirectionSection() {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Про нас"
+        description="Про «Всесвіт Звуків»: два заклади у Кривому Розі — корекційний клуб та дитячий садок. Наша команда, підхід та цінності."
+        path="/about"
+      />
       <Navigation />
 
       {/* ================= HERO ================= */}
@@ -358,6 +329,10 @@ export default function AboutPage() {
                 src={AboutUsP1}
                 alt="Турбота і безпека дітей"
                 className="w-full h-full object-cover aspect-[4/3]"
+                width={1024}
+                height={768}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -369,6 +344,10 @@ export default function AboutPage() {
                 src={individualApproachImage}
                 alt="Індивідуальний підхід до кожної дитини"
                 className="w-full h-full object-cover aspect-[4/3]"
+                width={1024}
+                height={768}
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -402,6 +381,10 @@ export default function AboutPage() {
                 src={professionalismImage}
                 alt="Професійні педагоги"
                 className="w-full h-full object-cover aspect-[4/3]"
+                width={1024}
+                height={768}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -413,6 +396,10 @@ export default function AboutPage() {
                 src={playBasedLearningImage}
                 alt="Діти навчаються через гру"
                 className="w-full h-full object-cover aspect-[4/3]"
+                width={1024}
+                height={768}
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -446,6 +433,10 @@ export default function AboutPage() {
                 src={partnershipImage}
                 alt="Партнерство з батьками"
                 className="w-full h-full object-cover aspect-[4/3]"
+                width={1024}
+                height={768}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

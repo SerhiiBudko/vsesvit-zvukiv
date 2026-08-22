@@ -1,15 +1,19 @@
 // src/app/pages/CorrectionalClubPage.tsx
-import LogopedPhoto2 from "@/assets/LogopedPhoto2.jpeg";
-import LogopedPhoto3 from "@/assets/LogopedPhoto3.jpeg";
-import LogopedPhoto4 from "@/assets/LogopedPhoto4.jpeg";
-import LogopedPhoto5 from "@/assets/LogopedPhoto5.jpeg";
-import LogopedPhoto6 from "@/assets/LogopedPhoto6.jpeg";
-import LogopedPhoto7 from "@/assets/LogopedPhoto7.jpeg";
-import LogopedPhoto8 from "@/assets/LogopedPhoto8.jpeg";
-import LogopedPhoto9 from "@/assets/LogopedPhoto9.jpeg";
-import LogopedPhoto10 from "@/assets/LogopedPhoto10.jpeg";
-import LogopedPhoto11 from "@/assets/LogopedPhoto11.jpeg";
-import LogopedPhoto12 from "@/assets/LogopedPhoto12.png";
+import LogopedPhoto2 from "@/assets/LogopedPhoto2.webp";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { HeroPanel } from "../components/HeroPanel";
+import { PageMeta } from "../components/PageMeta";
+import { OpenInMapsButton } from "../components/OpenInMapsButton";
+import LogopedPhoto3 from "@/assets/LogopedPhoto3.webp";
+import LogopedPhoto4 from "@/assets/LogopedPhoto4.webp";
+import LogopedPhoto5 from "@/assets/LogopedPhoto5.webp";
+import LogopedPhoto6 from "@/assets/LogopedPhoto6.webp";
+import LogopedPhoto7 from "@/assets/LogopedPhoto7.webp";
+import LogopedPhoto8 from "@/assets/LogopedPhoto8.webp";
+import LogopedPhoto9 from "@/assets/LogopedPhoto9.webp";
+import LogopedPhoto10 from "@/assets/LogopedPhoto10.webp";
+import LogopedPhoto11 from "@/assets/LogopedPhoto11.webp";
+import LogopedPhoto12 from "@/assets/LogopedPhoto12.webp";
 import logopedphoto1mobile from "@/assets/logopedp1mobile.webp";
 import logopedphoto1tablet from "@/assets/logopedp1tablet.webp";
 import logopedphoto1desktop from "@/assets/logopedp1desktop.webp"; 
@@ -33,53 +37,13 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+import { PHONES, EMAIL, CITY, CORRECTIONAL_CLUB } from "@/constants/contact";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { useRef, useState, ReactNode } from "react";
 
-type ImageSource = {
-  src: string;
-  w: number;
-  type?: string;
-};
-
-type ResponsiveImageProps = {
-  alt: string;
-  className?: string;
-  sources: ImageSource[];
-  sizes?: string;
-  fetchPriority?: "high" | "low" | "auto";
-  loading?: "eager" | "lazy";
-  decoding?: "async" | "auto" | "sync";
-};
-
-function ResponsiveImage({
-  alt,
-  className,
-  sources,
-  sizes,
-  fetchPriority,
-  loading,
-  decoding = "async",
-}: ResponsiveImageProps) {
-  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
-  const fallback = sources[0]?.src; // smallest as default
-
-  return (
-    <img
-      src={fallback}
-      srcSet={srcSet || undefined}
-      sizes={sizes}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding={decoding}
-      fetchPriority={fetchPriority}
-    />
-  );
-}
 
 
 /* ================= MOBILE HERO ================= */
@@ -147,6 +111,11 @@ function MobileCorrectionalHero() {
 export default function CorrectionalClubPage() {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Корекційний клуб"
+        description="Корекційний клуб «Всесвіт Звуків» у Кривому Розі: логопедичні та корекційні заняття для дітей, індивідуальний підхід."
+        path="/correctional_club"
+      />
       <Navigation />
 
       {/* ================= HERO SECTION ================= */}
@@ -159,12 +128,7 @@ export default function CorrectionalClubPage() {
       {/* Desktop hero */}
       <section className="relative overflow-hidden bg-white hidden lg:block" style={{ height: "640px" }}>
         {/* Full Background Photo - Animate from RIGHT */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-        >
+        <HeroPanel from="right">
           <ResponsiveImage
             alt="Діти граються з кульками"
             className="w-full h-full object-cover"
@@ -175,15 +139,10 @@ export default function CorrectionalClubPage() {
             fetchPriority="high"
             loading="eager"
           />
-        </motion.div>
+        </HeroPanel>
 
         {/* Navy Panel with Concave Semicircle Cut-out - Animate from LEFT */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-        >
+        <HeroPanel from="left">
           <svg width="100%" height="100%" viewBox="0 0 1440 640" preserveAspectRatio="none">
             <defs>
               <clipPath id="navy-clip-correctional">
@@ -192,7 +151,7 @@ export default function CorrectionalClubPage() {
             </defs>
             <rect width="1440" height="640" fill="#003060" clipPath="url(#navy-clip-correctional)" />
           </svg>
-        </motion.div>
+        </HeroPanel>
 
         {/* Content - Left */}
         <div className="relative z-10 h-full flex items-center">
@@ -301,31 +260,11 @@ export default function CorrectionalClubPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Map */}
-            <motion.div
-              className="rounded-3xl overflow-hidden shadow-xl bg-gray-100 h-[520px]"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <iframe
-                src="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Корекційний клуб - просп.Центральний (Лермонтова), 16, Кривий Ріг"
-              />
-            </motion.div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* Photos */}
             <motion.div
-              className="h-[520px]"
-              initial={{ opacity: 0, x: 30 }}
+              className="h-[420px] sm:h-[520px]"
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
@@ -334,51 +273,50 @@ export default function CorrectionalClubPage() {
                 <CorrectionalPhotoGallerySlider />
               </div>
             </motion.div>
-          </div>
 
-          {/* Contact info below */}
-          <motion.div
-            className="mt-12 flex justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="w-full max-w-[1050px] rounded-[28px] bg-[#FFFDF8] shadow-[0_12px_30px_rgba(0,0,0,0.08)] px-8 py-10 lg:px-12 lg:py-12">
-              <h3 className="text-center text-3xl lg:text-4xl font-bold text-[#003060]">
-                Контактна інформація
-              </h3>
+            {/* Contact info — shares the row with the photos */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="h-full rounded-[28px] bg-[#FFFDF8] shadow-[0_12px_30px_rgba(0,0,0,0.08)] px-6 py-6 lg:px-8 lg:py-7 flex flex-col justify-center">
+                <h3 className="text-center text-xl lg:text-2xl font-bold text-[#003060]">
+                  Контактна інформація
+                </h3>
 
-              <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
-                <ContactItem
-                  icon={<MapPin className="w-7 h-7 text-[#FFB703]" />}
-                  title="Адреса"
-                  lines={["просп.Центральний (Лермонтова), 16", "Кривий Ріг"]}
-                />
+                <div className="mt-5 grid grid-cols-1 gap-y-4">
+                  <ContactItem
+                    icon={<MapPin className="w-6 h-6 text-[#FFB703]" />}
+                    title="Адреса"
+                    lines={[CORRECTIONAL_CLUB.street, CITY]}
+                    mapUrl={CORRECTIONAL_CLUB.mapLinkUrl}
+                  />
 
-                <ContactItem
-                  icon={<Clock className="w-7 h-7 text-[#FFB703]" />}
-                  title="Режим роботи"
-                  lines={["Понеділок – П'ятниця", "8:30 – 16:00"]}
-                />
+                  <ContactItem
+                    icon={<Clock className="w-6 h-6 text-[#FFB703]" />}
+                    title="Режим роботи"
+                    lines={["Понеділок – П'ятниця", "8:30 – 16:00"]}
+                  />
 
-                <ContactItem
-                  icon={<Phone className="w-7 h-7 text-[#FFB703]" />}
-                  title="Телефон"
-                  links={[
-                    { href: "tel:+380987196649", label: "+380-98-719-66-49" },
-                    { href: "tel:+380672101516", label: "+380-67-210-15-16" },
-                  ]}
-                />
+                  <ContactItem
+                    icon={<Phone className="w-6 h-6 text-[#FFB703]" />}
+                    title="Телефон"
+                    links={[
+                      ...PHONES,
+                    ]}
+                  />
 
-                <ContactItem
-                  icon={<Mail className="w-7 h-7 text-[#FFB703]" />}
-                  title="Email"
-                  link={{ href: "mailto:budko79t@gmail.com", label: "budko79t@gmail.com" }}
-                />
+                  <ContactItem
+                    icon={<Mail className="w-6 h-6 text-[#FFB703]" />}
+                    title="Email"
+                    link={EMAIL}
+                  />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -487,37 +425,42 @@ function ContactItem({
   lines,
   link,
   links,
+  mapUrl,
 }: {
   icon: ReactNode;
   title: string;
   lines?: string[];
   link?: { href: string; label: string };
   links?: { href: string; label: string }[];
+  /** When set, renders an "open in Google Maps" link under the lines. */
+  mapUrl?: string;
 }) {
   return (
-    <div className="flex items-start gap-5">
-      <div className="w-14 h-14 rounded-full bg-[#FFB703]/10 flex items-center justify-center flex-shrink-0">
+    <div className="flex items-start gap-4">
+      <div className="w-11 h-11 rounded-full bg-[#FFB703]/10 flex items-center justify-center flex-shrink-0">
         {icon}
       </div>
 
       <div className="min-w-0">
-        <p className="text-xl font-bold text-[#2E2E2E]">{title}</p>
+        <p className="text-lg font-bold text-[#2E2E2E]">{title}</p>
 
         {lines && (
-          <div className="mt-2 space-y-1">
+          <div className="mt-1 space-y-0.5">
             {lines.map((l, idx) => (
-              <p key={idx} className="text-[#2E2E2E]/70 text-lg leading-snug">
+              <p key={idx} className="text-[#2E2E2E]/70 text-base leading-snug">
                 {l}
               </p>
             ))}
           </div>
         )}
 
+        {mapUrl && <OpenInMapsButton href={mapUrl} className="mt-3" />}
+
         {link && (
-          <div className="mt-2">
+          <div className="mt-1">
             <a
               href={link.href}
-              className="text-[#2E2E2E]/70 text-lg hover:text-[#FFB703] transition-colors"
+              className="text-[#2E2E2E]/70 text-base hover:text-[#FFB703] transition-colors"
             >
               {link.label}
             </a>
@@ -530,7 +473,7 @@ function ContactItem({
               <a
                 key={idx}
                 href={l.href}
-                className="block text-[#2E2E2E]/70 text-lg hover:text-[#FFB703] transition-colors"
+                className="block text-[#2E2E2E]/70 text-base hover:text-[#FFB703] transition-colors"
               >
                 {l.label}
               </a>
@@ -571,6 +514,10 @@ function CorrectionalPhotoGallerySlider() {
     arrows: false,
     fade: true,
     cssEase: "ease-in-out",
+    // `fade` stacks every slide inside the viewport, so the browser treats all
+    // of them as visible and decodes all of them at once — a dozen full-size
+    // bitmaps that stall scrolling. `ondemand` renders only the active slide.
+    lazyLoad: "ondemand" as const,
     beforeChange: (_current: number, next: number) => setCurrentSlide(next),
   };
 
@@ -580,7 +527,18 @@ function CorrectionalPhotoGallerySlider() {
         {allPhotos.map((photo, index) => (
           <div key={index}>
             <div className="relative h-[520px]">
-              <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
+              {/* Only the first slide is on screen at load; defer the rest so
+                  the gallery does not pull megabytes of photos up front. */}
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                className="w-full h-full object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                width={1040}
+                height={520}
+                {...(index === 0 ? { fetchpriority: "high" } : {})}
+              />
             </div>
           </div>
         ))}

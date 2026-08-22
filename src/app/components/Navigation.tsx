@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import logoImage from "@/assets/5497a58c61619b80f23e22721bc1a0f52c06c371.png";
+import logoImage from "@/assets/logo-vsesvit.webp";
 import { Instagram, Facebook, X, ChevronDown } from "lucide-react";
+import { SOCIALS } from "@/constants/contact";
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
@@ -9,6 +10,9 @@ export function Navigation() {
   const [mobilePricesOpen, setMobilePricesOpen] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // Close menu on route change
   useEffect(() => {
@@ -33,6 +37,54 @@ export function Navigation() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [pricesDropdownOpen]);
+
+  // Escape closes whichever overlay is open
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (open) {
+        setOpen(false);
+        hamburgerRef.current?.focus();
+      }
+      setPricesDropdownOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
+  // Keep Tab inside the mobile panel while it is open, and focus it on open
+  useEffect(() => {
+    if (!open) return;
+
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    closeButtonRef.current?.focus();
+
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    panel.addEventListener("keydown", handleTab);
+    return () => panel.removeEventListener("keydown", handleTab);
+  }, [open]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -65,6 +117,9 @@ export function Navigation() {
                 src={logoImage}
                 alt="Всесвіт Звуків"
                 className="w-full h-full object-cover"
+                width={56}
+                height={56}
+                decoding="async"
               />
             </div>
             <span className="hidden lg:block text-lg font-bold text-[#003057]">
@@ -107,6 +162,8 @@ export function Navigation() {
                 onClick={() => setPricesDropdownOpen(!pricesDropdownOpen)}
                 className="relative text-[#2E2E2E] transition-all duration-300 ease-out hover:scale-110 group flex items-center gap-1"
                 onMouseEnter={() => setPricesDropdownOpen(true)}
+                aria-expanded={pricesDropdownOpen}
+                aria-haspopup="true"
               >
                 <span className="absolute inset-0 -inset-x-3 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative font-medium">Ціни</span>
@@ -162,7 +219,7 @@ export function Navigation() {
           <div className="flex items-center gap-3">
             {/* Social Media Buttons */}
             <a
-              href="https://www.instagram.com/vsesvit_zvukiv/"
+              href={SOCIALS.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -176,7 +233,7 @@ export function Navigation() {
             </a>
 
             <a
-              href="https://www.facebook.com/tetana.budko.2025"
+              href={SOCIALS.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-[#1877F2] flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -187,9 +244,12 @@ export function Navigation() {
 
             {/* Hamburger button (mobile) */}
             <button
+              ref={hamburgerRef}
               onClick={() => setOpen(true)}
               className="lg:hidden w-12 h-12 rounded-xl flex items-center justify-center hover:bg-black/5 transition"
               aria-label="Open menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
             >
               <span className="flex flex-col gap-[6px]">
                 <span className="block w-8 h-[4px] bg-[#003057] rounded-full" />
@@ -211,11 +271,19 @@ export function Navigation() {
           />
 
           {/* Slide panel */}
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[420px] bg-white shadow-2xl">
+          <div
+            ref={panelRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Меню"
+            className="absolute right-0 top-0 h-full w-[86%] max-w-[420px] bg-white shadow-2xl"
+          >
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <p className="text-lg font-bold text-[#003057]">Меню</p>
                 <button
+                  ref={closeButtonRef}
                   onClick={() => setOpen(false)}
                   className="w-11 h-11 rounded-xl flex items-center justify-center hover:bg-black/5 transition"
                   aria-label="Close menu"
@@ -328,7 +396,7 @@ export function Navigation() {
 
                 <div className="flex gap-3">
                   <a
-                    href="https://www.instagram.com/vsesvit_zvukiv/"
+                    href={SOCIALS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full flex items-center justify-center"
@@ -342,7 +410,7 @@ export function Navigation() {
                   </a>
 
                   <a
-                    href="https://www.facebook.com/tetana.budko.2025"
+                    href={SOCIALS.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full bg-[#1877F2] flex items-center justify-center"

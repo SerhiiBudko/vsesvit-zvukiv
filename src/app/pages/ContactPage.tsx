@@ -1,6 +1,10 @@
 import { Navigation } from "../components/Navigation";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { HeroPanel } from "../components/HeroPanel";
+import { PageMeta } from "../components/PageMeta";
+import { SelectField } from "../components/SelectField";
+import { OpenInMapsButton } from "../components/OpenInMapsButton";
 import { Footer } from "../components/Footer";
-import { Button } from "../components/Button";
 import heroImageMobileWebp from "@/assets/Hero1_Mobile.webp";
 import heroImageTabletWebp from "@/assets/Hero1_Tablet.webp";
 import heroImageDesktopWebp from "@/assets/Hero1_Desktop.webp";
@@ -8,48 +12,16 @@ import { motion } from "motion/react";
 import { Phone, Mail, Instagram, Facebook, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { trackFormSubmission } from "../../utils/analytics";
+import {
+  PHONES,
+  PRIMARY_PHONE,
+  EMAIL,
+  SOCIALS,
+  KINDERGARTEN,
+  CORRECTIONAL_CLUB,
+} from "@/constants/contact";
 
-type ImageSource = {
-  src: string;
-  w: number;
-  type?: string;
-};
 
-type ResponsiveImageProps = {
-  alt: string;
-  className?: string;
-  sources: ImageSource[];
-  sizes?: string;
-  fetchPriority?: "high" | "low" | "auto";
-  loading?: "eager" | "lazy";
-  decoding?: "async" | "auto" | "sync";
-};
-
-function ResponsiveImage({
-  alt,
-  className,
-  sources,
-  sizes,
-  fetchPriority,
-  loading,
-  decoding = "async",
-}: ResponsiveImageProps) {
-  const srcSet = sources.map((s) => `${s.src} ${s.w}w`).join(", ");
-  const fallback = sources[0]?.src; // smallest as default
-
-  return (
-    <img
-      src={fallback}
-      srcSet={srcSet || undefined}
-      sizes={sizes}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding={decoding}
-      fetchPriority={fetchPriority}
-    />
-  );
-}
 
 /* ================= MOBILE HERO ================= */
 
@@ -118,9 +90,21 @@ function MobileContactHero() {
  * 3. Restart the dev server after adding env variables
  * 4. NEVER commit .env.local to git!
  */
+const DIRECTION_OPTIONS = [
+  { value: "Дитячий садок", label: "Дитячий садок" },
+  { value: "Корекційний клуб", label: "Корекційний клуб" },
+];
+
+const SUBMIT_ERROR_MESSAGE =
+  "Не вдалося надіслати заявку. Перевірте з'єднання та спробуйте ще раз, " +
+  "або зателефонуйте нам напряму.";
+
 function EnrollmentFormSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [direction, setDirection] = useState("");
+  const [directionError, setDirectionError] = useState<string | null>(null);
 
   // Get access key from environment variable
   const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
@@ -137,7 +121,14 @@ function EnrollmentFormSection() {
       return;
     }
 
+    if (!direction) {
+      setDirectionError("Будь ласка, оберіть напрямок");
+      return;
+    }
+    setDirectionError(null);
+
     setIsLoading(true);
+    setSubmitError(null);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -148,16 +139,25 @@ function EnrollmentFormSection() {
         body: formData,
       });
 
-      if (response.ok) {
+      // Web3Forms answers with { success: boolean, message: string } and uses a
+      // non-2xx status for rejected submissions (bad key, rate limit, spam).
+      const result = await response.json().catch(() => null);
+
+      if (response.ok && result?.success !== false) {
         setIsSuccess(true);
         form.reset();
+        setDirection("");
         // Track form submission in Google Analytics
         trackFormSubmission("enrollment_form");
         // Reset success message after 5 seconds
         setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        // Never fail silently: the parent must know the request did not arrive.
+        setSubmitError(SUBMIT_ERROR_MESSAGE);
       }
     } catch (error) {
       console.error("Form submission error:", error);
+      setSubmitError(SUBMIT_ERROR_MESSAGE);
     } finally {
       setIsLoading(false);
     }
@@ -211,20 +211,42 @@ function EnrollmentFormSection() {
             </motion.div>
           )}
 
-          {/* Success Message */}
-          {isSuccess && (
-            <motion.div
-              className="mb-8 p-4 bg-green-50 border border-green-200 rounded-2xl flex items-center gap-3"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
-              <p className="text-green-800 font-medium">
-                Заявку надіслано, Ми з вами зв'яжемося!
-              </p>
-            </motion.div>
-          )}
+          {/* Success / submission-failure messages (announced to screen readers) */}
+          <div aria-live="polite">
+            {isSuccess && (
+              <motion.div
+                className="mb-8 p-4 bg-green-50 border border-green-200 rounded-2xl flex items-center gap-3"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+                <p className="text-green-800 font-medium">
+                  Заявку надіслано, Ми з вами зв'яжемося!
+                </p>
+              </motion.div>
+            )}
+
+            {submitError && (
+              <motion.div
+                className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+                <div>
+                  <p className="text-red-800 font-medium">{submitError}</p>
+                  <a
+                    href={PRIMARY_PHONE.href}
+                    className="text-red-900 font-semibold underline hover:no-underline"
+                  >
+                    {PRIMARY_PHONE.label}
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -232,6 +254,17 @@ function EnrollmentFormSection() {
             <input type="hidden" name="access_key" value={accessKey || ""} />
             <input type="hidden" name="subject" value="Нова заявка для Всесвіт Звуків" />
             <input type="hidden" name="from_name" value="Всесвіт Звуків" />
+
+            {/* Honeypot: bots fill this, humans never see it. Web3Forms
+                discards any submission where `botcheck` is set. */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="hidden"
+              style={{ display: "none" }}
+              tabIndex={-1}
+              aria-hidden="true"
+            />
 
             {/* Parent Name */}
             <div>
@@ -281,19 +314,19 @@ function EnrollmentFormSection() {
 
               {/* Direction - Second on mobile (below), second on desktop */}
               <div className="mb-4 md:mb-0">
-                <label htmlFor="direction" className="block text-sm font-semibold text-[#003060] mb-2">
-                  Напрямок *
-                </label>
-                <select
-                  id="direction"
+                <SelectField
                   name="direction"
+                  label="Напрямок"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#003060] focus:ring-2 focus:ring-[#003060]/20 outline-none transition-all duration-200 text-[#2E2E2E] bg-white"
-                >
-                  <option value="">Оберіть напрямок</option>
-                  <option value="Дитячий садок">Дитячий садок</option>
-                  <option value="Корекційний клуб">Корекційний клуб</option>
-                </select>
+                  placeholder="Оберіть напрямок"
+                  options={DIRECTION_OPTIONS}
+                  value={direction}
+                  onChange={(next) => {
+                    setDirection(next);
+                    setDirectionError(null);
+                  }}
+                  error={directionError}
+                />
               </div>
             </div>
 
@@ -343,6 +376,11 @@ function EnrollmentFormSection() {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Контакти"
+        description="Контакти «Всесвіт Звуків» у Кривому Розі: адреси, телефони, графік роботи та форма запису на консультацію."
+        path="/contact"
+      />
       <Navigation />
 
       {/* ================= HERO ================= */}
@@ -367,12 +405,7 @@ export default function ContactPage() {
         </svg>
 
         {/* Full Background Photo - Animate from RIGHT */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-        >
+        <HeroPanel from="right">
           <ResponsiveImage
             alt="Діти граються з кульками"
             className="w-full h-full object-cover"
@@ -383,15 +416,10 @@ export default function ContactPage() {
             fetchPriority="high"
             loading="eager"
           />
-        </motion.div>
+        </HeroPanel>
 
         {/* Navy Panel - Animate from LEFT */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.9, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
-        >
+        <HeroPanel from="left">
           <svg width="100%" height="100%" viewBox="0 0 1440 640" preserveAspectRatio="none">
             <defs>
               <clipPath id="navy-clip-contact">
@@ -400,7 +428,7 @@ export default function ContactPage() {
             </defs>
             <rect width="1440" height="640" fill="#003060" clipPath="url(#navy-clip-contact)" />
           </svg>
-        </motion.div>
+        </HeroPanel>
 
         {/* Content */}
         <div className="relative z-10 h-full flex items-center">
@@ -463,19 +491,22 @@ export default function ContactPage() {
               </p>
 
               <div className="space-y-3 mb-6">
+                {PHONES.map((phone) => (
+                  <a
+                    key={phone.href}
+                    href={phone.href}
+                    className="flex items-center justify-center gap-2 text-[#003060] hover:text-[#FFB703] transition-colors duration-300"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span className="text-lg font-medium">{phone.label}</span>
+                  </a>
+                ))}
                 <a
-                  href="tel:+380987196649"
-                  className="flex items-center justify-center gap-2 text-[#003060] hover:text-[#FFB703] transition-colors duration-300"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span className="text-lg font-medium">+380-98-719-66-49</span>
-                </a>
-                <a
-                  href="mailto:budko79t@gmail.com"
+                  href={EMAIL.href}
                   className="flex items-center justify-center gap-2 text-[#003060] hover:text-[#FFB703] transition-colors duration-300"
                 >
                   <Mail className="w-5 h-5" />
-                  <span className="text-lg font-medium">budko79t@gmail.com</span>
+                  <span className="text-lg font-medium">{EMAIL.label}</span>
                 </a>
               </div>
             </motion.div>
@@ -500,7 +531,7 @@ export default function ContactPage() {
 
               <div className="flex gap-6 mb-6">
                 <a
-                  href="https://www.instagram.com/vsesvit_zvukiv/"
+                  href={SOCIALS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -513,7 +544,7 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="https://www.facebook.com/tetana.budko.2025"
+                  href={SOCIALS.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-16 h-16 rounded-full bg-[#1877F2] flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -535,19 +566,6 @@ export default function ContactPage() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.42, 0, 0.58, 1], delay: 0.1 }}
             >
-              <div className="w-full h-64 bg-gray-200">
-                <iframe
-                  src="https://www.google.com/maps?q=проспект+миру+31,+Кривий+Ріг&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Дитячий садок - проспект миру 31, Кривий Ріг"
-                />
-              </div>
-
               <div className="p-8">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#003060] mb-6">
                   Дитячий садок
@@ -557,7 +575,8 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-[#FFB703] flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-[#2E2E2E] mb-1">Адреса:</p>
-                    <p className="text-[#2E2E2E]">проспект миру 31, Кривий Ріг</p>
+                    <p className="text-[#2E2E2E] mb-3">{KINDERGARTEN.full}</p>
+                    <OpenInMapsButton href={KINDERGARTEN.mapLinkUrl} />
                   </div>
                 </div>
 
@@ -575,21 +594,14 @@ export default function ContactPage() {
                   <div>
                     <p className="font-semibold text-[#2E2E2E] mb-1">Телефон:</p>
                     <a
-                      href="tel:+380987196649"
+                      href={PRIMARY_PHONE.href}
                       className="text-[#003060] hover:text-[#FFB703] transition-colors duration-300"
                     >
-                      +380-98-719-66-49
+                      {PRIMARY_PHONE.label}
                     </a>
                   </div>
                 </div>
 
-                <Button
-                  variant="primary"
-                  size="md"
-                  href="https://www.google.com/maps?q=проспект+миру+31,+Кривий+Ріг"
-                >
-                  Прокласти маршрут
-                </Button>
               </div>
             </motion.div>
 
@@ -602,19 +614,6 @@ export default function ContactPage() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.42, 0, 0.58, 1], delay: 0.2 }}
             >
-              <div className="w-full h-64 bg-gray-200">
-                <iframe
-                  src="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Корекційний клуб - просп.Центральний (Лермонтова), 16, Кривий Ріг"
-                />
-              </div>
-
               <div className="p-8">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#003060] mb-6">
                   Корекційний клуб
@@ -624,7 +623,8 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-[#FFB703] flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-[#2E2E2E] mb-1">Адреса:</p>
-                    <p className="text-[#2E2E2E]">просп.Центральний (Лермонтова), 16, Кривий Ріг</p>
+                    <p className="text-[#2E2E2E] mb-3">{CORRECTIONAL_CLUB.full}</p>
+                    <OpenInMapsButton href={CORRECTIONAL_CLUB.mapLinkUrl} />
                   </div>
                 </div>
 
@@ -643,21 +643,14 @@ export default function ContactPage() {
                   <div>
                     <p className="font-semibold text-[#2E2E2E] mb-1">Телефон:</p>
                     <a
-                      href="tel:+380987196649"
+                      href={PRIMARY_PHONE.href}
                       className="text-[#003060] hover:text-[#FFB703] transition-colors duration-300"
                     >
-                      +380-98-719-66-49
+                      {PRIMARY_PHONE.label}
                     </a>
                   </div>
                 </div>
 
-                <Button
-                  variant="primary"
-                  size="md"
-                  href="https://www.google.com/maps?q=просп.Центральний+(Лермонтова),+16,+Кривий+Ріг"
-                >
-                  Прокласти маршрут
-                </Button>
               </div>
             </motion.div>
           </div>

@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 /**
  * Google Analytics 4 Component
- * 
+ *
  * Loads GA4 script dynamically for better Cloudflare compatibility.
- * 
+ *
  * SETUP:
  * 1. Get your GA4 Measurement ID from Google Analytics (format: G-XXXXXXXXXX)
  * 2. Add it to .env.local: VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
@@ -12,50 +12,42 @@ import { useEffect } from 'react';
  */
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
+const GTAG_SRC = 'https://www.googletagmanager.com/gtag/js';
 
 export function GoogleAnalytics() {
   useEffect(() => {
-    // Only load if measurement ID is provided
+    // Only load if a real measurement ID is configured
     if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
-      console.warn('Google Analytics: Measurement ID not configured');
       return;
     }
 
-    console.log('Google Analytics: Initializing with ID:', GA_MEASUREMENT_ID);
+    // Guard against a second injection (StrictMode double-invokes effects).
+    if (document.querySelector(`script[src^="${GTAG_SRC}"]`)) {
+      return;
+    }
 
     // dataLayer and gtag are already initialized in index.html <head>
     // Just load the gtag.js script
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    
+    script.src = `${GTAG_SRC}?id=${GA_MEASUREMENT_ID}`;
+
     script.onload = () => {
-      console.log('Google Analytics: Script loaded, configuring...');
-      // gtag is already available from index.html
       window.gtag('js', new Date());
       window.gtag('config', GA_MEASUREMENT_ID, {
         send_page_view: false, // We handle page views manually for React Router
       });
-      console.log('Google Analytics: Configuration sent');
     };
-    
+
     script.onerror = () => {
       console.error('Google Analytics: Failed to load script');
     };
-    
+
     document.head.appendChild(script);
 
-    return () => {
-      // Cleanup: remove script if component unmounts
-      const existingScript = document.querySelector(
-        `script[src*="googletagmanager.com/gtag/js"]`
-      );
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
+    // No cleanup: gtag.js is a page-level singleton. Removing it on unmount
+    // would tear down tracking for the rest of the session.
   }, []);
 
   return null;
 }
-

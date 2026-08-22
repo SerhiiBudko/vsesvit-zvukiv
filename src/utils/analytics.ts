@@ -1,14 +1,10 @@
 /**
  * Google Analytics 4 Utility
- * 
- * This utility handles Google Analytics tracking for the site.
- * Works with Cloudflare by using async script loading.
- * 
+ *
  * SETUP:
  * 1. Get your GA4 Measurement ID from Google Analytics (format: G-XXXXXXXXXX)
  * 2. Add it to .env.local: VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
- * 3. Update the script tag in index.html with your actual ID
- * 4. For production, add VITE_GA_MEASUREMENT_ID to GitHub Secrets
+ * 3. For production, add VITE_GA_MEASUREMENT_ID to GitHub Secrets
  */
 
 // Get GA Measurement ID from environment variable
@@ -22,27 +18,24 @@ declare global {
   }
 }
 
+function canTrack() {
+  return typeof window !== 'undefined' && !!window.gtag && !!GA_MEASUREMENT_ID;
+}
+
 /**
- * Track a page view
+ * Track a page view.
+ *
+ * GA4 wants an explicit `page_view` event for client-side navigation. The
+ * earlier version re-ran gtag('config', ...) on every route change and passed
+ * `page_path`, which is a Universal Analytics parameter that GA4 ignores.
  */
 export function trackPageView(path: string, title?: string) {
-  if (typeof window === 'undefined') {
-    console.warn('Google Analytics: window is undefined');
-    return;
-  }
-  
-  if (!window.gtag) {
-    console.warn('Google Analytics: gtag function not available yet');
-    return;
-  }
-  
-  if (!GA_MEASUREMENT_ID) {
-    console.warn('Google Analytics: Measurement ID not configured');
+  if (!canTrack()) {
     return;
   }
 
-  console.log('Google Analytics: Tracking page view', path);
-  window.gtag('config', GA_MEASUREMENT_ID, {
+  window.gtag('event', 'page_view', {
+    page_location: window.location.origin + path,
     page_path: path,
     page_title: title || document.title,
   });
@@ -57,7 +50,7 @@ export function trackEvent(
     [key: string]: any;
   }
 ) {
-  if (typeof window === 'undefined' || !window.gtag || !GA_MEASUREMENT_ID) {
+  if (!canTrack()) {
     return;
   }
 
@@ -91,4 +84,3 @@ export function trackExternalLink(url: string) {
     link_url: url,
   });
 }
-

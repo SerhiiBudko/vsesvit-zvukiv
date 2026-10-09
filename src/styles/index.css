@@ -1,2 +1,9 @@
 @import './tailwind.css';
 @import './theme.css';
+
+/* Never let a transient animation offset turn into a sideways page drag. */
+html,
+body {
+  overflow-x: hidden; /* older iOS Safari */
+  overflow-x: clip;
+}

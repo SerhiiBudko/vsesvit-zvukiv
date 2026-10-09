@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { MotionConfig } from "motion/react";
 import HomePage from "./pages/HomePage";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -31,18 +31,42 @@ function AnalyticsTracker() {
   return null;
 }
 
+/**
+ * Phones and tablets get transform-free animations.
+ *
+ * The slide-in effects (x / y offsets) are what make scrolling stutter on a
+ * mid-range phone, and the horizontal offsets briefly push cards past the
+ * viewport edge so the page can be dragged sideways. Below the desktop
+ * breakpoint we force Motion's reduced-motion mode: opacity still fades, but
+ * nothing moves. On desktop the OS "reduce motion" setting is honoured.
+ */
+function useReducedMotionMode(): "always" | "user" {
+  const query = "(max-width: 1023px)";
+  const [isSmall, setIsSmall] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = (e: MediaQueryListEvent) => setIsSmall(e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  return isSmall ? "always" : "user";
+}
+
 /** Holds the viewport steady while a route chunk downloads. */
 function RouteFallback() {
   return <div className="min-h-screen bg-white" />;
 }
 
 export default function App() {
+  const reducedMotion = useReducedMotionMode();
+
   return (
     <BrowserRouter>
-      {/* reducedMotion="user" makes every animation on the site honour the
-          operating system's "reduce motion" setting, which is also the fastest
-          escape hatch for anyone on a low-powered device. */}
-      <MotionConfig reducedMotion="user">
+      <MotionConfig reducedMotion={reducedMotion}>
         <GoogleAnalytics />
         <PerfOverlay />
         <ScrollToTop />

@@ -221,7 +221,7 @@ function MobileHero() {
           alt="Діти граються з кульками"
           className="relative z-10 w-full h-full object-cover"
           sources={[
-            { src: heroImageMobileWebp, w: 640 }
+            { src: heroImageMobileWebp, w: 768 }
           ]}
           // для мобільного — картинка на всю ширину екрану
           sizes="100vw"

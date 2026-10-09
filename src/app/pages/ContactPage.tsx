@@ -42,7 +42,7 @@ function MobileContactHero() {
         <ResponsiveImage
           alt="Діти граються з кульками"
           className="relative z-10 w-full h-full object-cover"
-          sources={[{ src: heroImageMobileWebp, w: 640 }]}
+          sources={[{ src: heroImageMobileWebp, w: 768 }]}
           sizes="100vw"
           fetchPriority="high"
           loading="eager"

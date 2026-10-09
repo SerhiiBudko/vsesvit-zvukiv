@@ -79,12 +79,9 @@
       }
     </script>
 
-    <!-- Google Analytics - Initialize dataLayer in <head> as recommended -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-    </script>
+    <!-- Google Analytics - dataLayer bootstrap lives in an external file so CSP
+         can forbid inline scripts -->
+    <script src="/gtag-init.js"></script>
   </head>
 
   <body>

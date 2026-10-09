@@ -193,7 +193,7 @@ export default function CorrectionalClubPricesPage() {
             
             {/* Card 1: Speech Disorders */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -235,7 +235,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* Card 2: Speech Development Delays */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -277,7 +277,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* Card 3: Complex Conditions */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -346,7 +346,7 @@ export default function CorrectionalClubPricesPage() {
             
             {/* Psychology */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -390,7 +390,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* Sensory Therapy / Neuropsychology */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -429,7 +429,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* Massage */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -468,7 +468,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* Music */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white lg:bg-white rounded-3xl p-8 lg:p-10 shadow-md lg:shadow-lg hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -539,7 +539,7 @@ export default function CorrectionalClubPricesPage() {
             
             {/* English Language */}
             <motion.div
-              className="bg-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#FFB703]"
+              className="bg-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-2 border-[#FFB703]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -586,7 +586,7 @@ export default function CorrectionalClubPricesPage() {
 
             {/* School Preparation */}
             <motion.div
-              className="bg-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#FFB703]"
+              className="bg-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-2 border-[#FFB703]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

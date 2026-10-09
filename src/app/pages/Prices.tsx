@@ -189,7 +189,7 @@ export default function PricesPage() {
             
             {/* Card 1: Full Day */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden flex flex-col"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -257,7 +257,7 @@ export default function PricesPage() {
 
             {/* Card 2: Half Day */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden border-2 border-[#FFB703] flex flex-col"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden border-2 border-[#FFB703] flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -332,7 +332,7 @@ export default function PricesPage() {
 
             {/* Card 3: Flexible Schedule */}
             <motion.div
-              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden flex flex-col"
+              className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 group overflow-hidden flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -407,7 +407,7 @@ export default function PricesPage() {
         <div className="max-w-[1200px] mx-auto px-8 lg:px-12">
           
           <motion.div
-            className="bg-white rounded-3xl p-10 lg:p-16 shadow-lg hover:shadow-2xl transition-all duration-300"
+            className="bg-white rounded-3xl p-10 lg:p-16 shadow-lg hover:shadow-2xl transition-shadow duration-300"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -500,7 +500,7 @@ export default function PricesPage() {
             
             {/* Choreography */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -529,7 +529,7 @@ export default function PricesPage() {
 
             {/* Music & Rhythm */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -558,7 +558,7 @@ export default function PricesPage() {
 
             {/* Neuro-exercises */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-br from-blue-50/50 to-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

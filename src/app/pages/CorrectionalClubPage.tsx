@@ -385,7 +385,7 @@ function SpeechTherapyDirectionsSection() {
             return (
               <motion.div
                 key={it.title}
-                className="rounded-3xl bg-[#FFFDF8] border border-[#FFB703]/25 shadow-[0_10px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_34px_rgba(0,0,0,0.10)] transition-all duration-300 p-7 lg:p-8"
+                className="rounded-3xl bg-[#FFFDF8] border border-[#FFB703]/25 shadow-[0_10px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_34px_rgba(0,0,0,0.10)] transition-shadow duration-300 p-7 lg:p-8"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
